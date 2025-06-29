@@ -1,0 +1,386 @@
+{
+    "qr1": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr1.png"
+    },
+    "qr2": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr2.png"
+    },
+    "qr3": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr3.png"
+    },
+    "qr4": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr4.png"
+    },
+    "qr5": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr5.png"
+    },
+    "qr6": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr6.png"
+    },
+    "qr7": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr7.png"
+    },
+    "qr8": {
+        "user_id": "bader230705@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr8.png"
+    },
+    "qr9": {
+        "user_id": "bader230705@gmail.com",
+        "ssid": "aa",
+        "password": "1aa",
+        "image_path": "images/qr9.png"
+    },
+    "qr10": {
+        "user_id": "bader230705@gmail.com",
+        "ssid": "aass",
+        "password": "ddd",
+        "image_path": "images/qr10.png"
+    },
+    "qr11": {
+        "user_id": "bader230705@gmail.com",
+        "ssid": "ggg",
+        "password": "zzz",
+        "image_path": "images/qr11.png"
+    },
+    "qr12": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "ss",
+        "password": "aa",
+        "image_path": "images/qr12.png"
+    },
+    "qr13": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "ss",
+        "password": "de",
+        "image_path": "images/qr13.png"
+    },
+    "qr14": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "hh",
+        "password": "dd",
+        "image_path": "images/qr14.png"
+    },
+    "qr15": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "xx",
+        "password": "xx",
+        "image_path": "images/qr15.png"
+    },
+    "qr16": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr16.png"
+    },
+    "qr17": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr17.png"
+    },
+    "qr18": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr18.png"
+    },
+    "qr19": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "xx",
+        "password": "xx",
+        "image_path": "images/qr19.png"
+    },
+    "qr20": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "dd",
+        "password": "dd",
+        "image_path": "images/qr20.png"
+    },
+    "qr21": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr21.png"
+    },
+    "qr22": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "xx",
+        "password": "xx",
+        "image_path": "images/qr22.png"
+    },
+    "qr23": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "xx",
+        "password": "ss",
+        "image_path": "images/qr23.png"
+    },
+    "qr24": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "ss",
+        "password": "dd",
+        "image_path": "images/qr24.png"
+    },
+    "qr25": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "vv",
+        "password": "gg",
+        "image_path": "images/qr25.png"
+    },
+    "qr26": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "gg",
+        "password": "gg",
+        "image_path": "images/qr26.png"
+    },
+    "qr27": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "gg",
+        "password": "ff",
+        "image_path": "images/qr27.png"
+    },
+    "qr28": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "yy",
+        "password": "tt",
+        "image_path": "images/qr28.png"
+    },
+    "qr29": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "yu",
+        "password": "rd",
+        "image_path": "images/qr29.png"
+    },
+    "qr216": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "aa",
+        "password": "ss",
+        "image_path": "images/qr216.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr217": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "aa",
+        "password": "aa",
+        "image_path": "images/qr217.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr218": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "ss",
+        "password": "ss",
+        "image_path": "images/qr218.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr219": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "dd",
+        "password": "dd",
+        "image_path": "images/qr219.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr220": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "aa",
+        "password": "aa",
+        "image_path": "images/qr220.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr221": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "dd",
+        "password": "sss",
+        "image_path": "images/qr221.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr222": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "dd",
+        "password": "sss",
+        "image_path": "images/qr222.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr223": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "aa",
+        "password": "aa",
+        "image_path": "images/qr223.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr224": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "aa",
+        "password": "aa",
+        "image_path": "images/qr224.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr225": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "ss",
+        "password": "ss",
+        "image_path": "images/qr225.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr226": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "dd",
+        "password": "dd",
+        "image_path": "images/qr226.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr227": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "ss",
+        "password": "ss",
+        "image_path": "images/qr227.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr228": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "dd",
+        "password": "dd",
+        "image_path": "images/qr228.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr229": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "ss",
+        "password": "ss",
+        "image_path": "images/qr229.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr230": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "dd",
+        "password": "dd",
+        "image_path": "images/qr230.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr231": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "ss",
+        "password": "ss",
+        "image_path": "images/qr231.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr232": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "ahhd",
+        "password": "djjd",
+        "image_path": "images/qr232.png",
+        "scan_text": "mdjdjjd"
+    },
+    "qr233": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "hs",
+        "password": "sk",
+        "image_path": "images/qr233.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr234": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "hh",
+        "password": "kk",
+        "image_path": "images/qr234.png",
+        "scan_text": "jgjgugj"
+    },
+    "qr235": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "aa",
+        "password": "aa",
+        "image_path": "images/qr235.png",
+        "scan_text": "yooo"
+    },
+    "qr236": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "ss",
+        "password": "ss",
+        "image_path": "images/qr236.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr237": {
+        "user_id": "bader230705@gmail.com",
+        "ssid": "uu",
+        "password": "dd",
+        "image_path": "images/qr237.png",
+        "scan_text": "heyy"
+    },
+    "qr238": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "ff",
+        "password": "dd",
+        "image_path": "images/qr238.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr239": {
+        "user_id": "bader230705@gmail.com",
+        "ssid": "pop",
+        "password": "pop",
+        "image_path": "images/qr239.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr240": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "aaa",
+        "password": "aaa",
+        "image_path": "images/qr240.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr241": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "tst12",
+        "password": "aaa",
+        "image_path": "images/qr241.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr242": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "ss",
+        "password": "ss",
+        "image_path": "images/qr242.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr243": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "ff",
+        "password": "ff",
+        "image_path": "images/qr243.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr244": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "dd",
+        "password": "dd",
+        "image_path": "images/qr244.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr245": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "FF",
+        "password": "FF",
+        "image_path": "images/qr245.png",
+        "scan_text": "SCAN ME"
+    }
+}

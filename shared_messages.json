@@ -1,0 +1,531 @@
+[
+    {
+        "id": "qr9",
+        "from": "badr",
+        "to": "bader",
+        "qr_id": "qr9",
+        "qr_data": {
+            "id": "qr9",
+            "user_id": "bader230705@gmail.com",
+            "ssid": "aa",
+            "password": "1aa",
+            "image_path": "images/qr9.png"
+        },
+        "message": "never",
+        "time": "2025-06-28 22:24:05",
+        "expire_in": "0",
+        "read": true,
+        "deleted_by": [
+            "badr",
+            "bader"
+        ]
+    },
+    {
+        "id": "qr11",
+        "from": "badr",
+        "to": "bader",
+        "qr_id": "qr11",
+        "qr_data": {
+            "id": "qr11",
+            "user_id": "bader230705@gmail.com",
+            "ssid": "ggg",
+            "password": "zzz",
+            "image_path": "images/qr11.png"
+        },
+        "message": "1min",
+        "time": "2025-06-28 22:24:26",
+        "expire_in": "1",
+        "read": true,
+        "deleted_by": [
+            "bader"
+        ]
+    },
+    {
+        "id": "qr241",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr241",
+        "qr_data": {
+            "id": "qr241",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "tst12",
+            "password": "aaa",
+            "image_path": "images/qr241.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-06-28 22:29:19",
+        "expire_in": "0",
+        "read": true,
+        "deleted_by": [
+            "bader",
+            "badr"
+        ]
+    },
+    {
+        "id": "qr5",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr5",
+        "qr_data": {
+            "id": "qr5",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr5.png"
+        },
+        "message": "",
+        "time": "2025-06-29 17:16:16",
+        "expire_in": "720",
+        "read": true,
+        "deleted_by": [
+            "bader",
+            "badr"
+        ]
+    },
+    {
+        "id": "qr5",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr5",
+        "qr_data": {
+            "id": "qr5",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr5.png"
+        },
+        "message": "",
+        "time": "2025-06-29 17:16:37",
+        "expire_in": "43200",
+        "read": true,
+        "deleted_by": [
+            "bader",
+            "badr"
+        ]
+    },
+    {
+        "id": "qr6",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr6",
+        "qr_data": {
+            "id": "qr6",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr6.png"
+        },
+        "message": "",
+        "time": "2025-06-29 17:30:39",
+        "expire_in": "5 hours",
+        "read": true,
+        "deleted_by": [
+            "bader",
+            "badr"
+        ]
+    },
+    {
+        "id": "qr3",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr3",
+        "qr_data": {
+            "id": "qr3",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr3.png"
+        },
+        "message": "",
+        "time": "2025-06-29 17:30:47",
+        "expire_in": "15 minutes",
+        "read": true,
+        "deleted_by": [
+            "bader"
+        ]
+    },
+    {
+        "id": "qr14",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr14",
+        "qr_data": {
+            "id": "qr14",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "hh",
+            "password": "dd",
+            "image_path": "images/qr14.png"
+        },
+        "message": "",
+        "time": "2025-06-29 17:30:55",
+        "expire_in": "7 days",
+        "read": true,
+        "deleted_by": [
+            "bader"
+        ]
+    },
+    {
+        "id": "qr7",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr7",
+        "qr_data": {
+            "id": "qr7",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr7.png"
+        },
+        "message": "",
+        "time": "2025-06-29 17:35:37",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            "bader",
+            "badr"
+        ]
+    },
+    {
+        "id": "qr5",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr5",
+        "qr_data": {
+            "id": "qr5",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr5.png"
+        },
+        "message": "",
+        "time": "2025-06-29 17:35:50",
+        "expire_in": "1 minutes",
+        "read": true,
+        "deleted_by": [
+            "bader",
+            "badr"
+        ]
+    },
+    {
+        "id": "qr14",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr14",
+        "qr_data": {
+            "id": "qr14",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "hh",
+            "password": "dd",
+            "image_path": "images/qr14.png"
+        },
+        "message": "",
+        "time": "2025-06-29 17:36:12",
+        "expire_in": "5 hours",
+        "read": true,
+        "deleted_by": [
+            "bader"
+        ]
+    },
+    {
+        "id": "qr5",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr5",
+        "qr_data": {
+            "id": "qr5",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr5.png"
+        },
+        "message": "",
+        "time": "2025-06-29 17:36:23",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            "bader",
+            "badr"
+        ]
+    },
+    {
+        "id": "qr5",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr5",
+        "qr_data": {
+            "id": "qr5",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr5.png"
+        },
+        "message": "",
+        "time": "2025-06-29 17:36:39",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            "bader",
+            "badr"
+        ]
+    },
+    {
+        "id": "qr20",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr20",
+        "qr_data": {
+            "id": "qr20",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "dd",
+            "password": "dd",
+            "image_path": "images/qr20.png"
+        },
+        "message": "",
+        "time": "2025-06-29 17:36:48",
+        "expire_in": "1 minutes",
+        "read": true,
+        "deleted_by": []
+    },
+    {
+        "id": "qr14",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr14",
+        "qr_data": {
+            "id": "qr14",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "hh",
+            "password": "dd",
+            "image_path": "images/qr14.png"
+        },
+        "message": "",
+        "time": "2025-06-29 17:37:47",
+        "expire_in": "5 minutes",
+        "read": true,
+        "deleted_by": [
+            "bader"
+        ]
+    },
+    {
+        "id": "qr5",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr5",
+        "qr_data": {
+            "id": "qr5",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr5.png"
+        },
+        "message": "",
+        "time": "2025-06-29 17:38:21",
+        "expire_in": "5 minutes",
+        "read": true,
+        "deleted_by": [
+            "bader",
+            "badr"
+        ]
+    },
+    {
+        "id": "qr5",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr5",
+        "qr_data": {
+            "id": "qr5",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr5.png"
+        },
+        "message": "",
+        "time": "2025-06-29 17:42:08",
+        "expire_in": "1 minutes",
+        "read": true,
+        "deleted_by": [
+            "bader",
+            "badr"
+        ]
+    },
+    {
+        "id": "qr6",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr6",
+        "qr_data": {
+            "id": "qr6",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr6.png"
+        },
+        "message": "",
+        "time": "2025-06-29 18:01:14",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            "bader",
+            "badr"
+        ]
+    },
+    {
+        "id": "qr5",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr5",
+        "qr_data": {
+            "id": "qr5",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr5.png"
+        },
+        "message": "",
+        "time": "2025-06-29 18:10:50",
+        "expire_in": "5 minutes",
+        "read": true,
+        "deleted_by": [
+            "bader",
+            "badr"
+        ]
+    },
+    {
+        "id": "qr7",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr7",
+        "qr_data": {
+            "id": "qr7",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr7.png"
+        },
+        "message": "",
+        "time": "2025-06-29 18:11:05",
+        "expire_in": "15 minutes",
+        "read": true,
+        "deleted_by": [
+            "bader",
+            "badr"
+        ]
+    },
+    {
+        "id": "qr10",
+        "from": "badr",
+        "to": "bader",
+        "qr_id": "qr10",
+        "qr_data": {
+            "id": "qr10",
+            "user_id": "bader230705@gmail.com",
+            "ssid": "aass",
+            "password": "ddd",
+            "image_path": "images/qr10.png"
+        },
+        "message": "",
+        "time": "2025-06-29 18:41:01",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            "bader"
+        ]
+    },
+    {
+        "id": "qr11",
+        "from": "badr",
+        "to": "bader",
+        "qr_id": "qr11",
+        "qr_data": {
+            "id": "qr11",
+            "user_id": "bader230705@gmail.com",
+            "ssid": "ggg",
+            "password": "zzz",
+            "image_path": "images/qr11.png"
+        },
+        "message": "",
+        "time": "2025-06-29 18:43:35",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            "bader"
+        ]
+    },
+    {
+        "id": "qr5",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr5",
+        "qr_data": {
+            "id": "qr5",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr5.png"
+        },
+        "message": "admin",
+        "time": "2025-06-29 19:16:23",
+        "expire_in": "10 minutes",
+        "read": true,
+        "deleted_by": []
+    },
+    {
+        "id": "qr7",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr7",
+        "qr_data": {
+            "id": "qr7",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr7.png"
+        },
+        "message": "aa",
+        "time": "2025-06-29 19:32:04",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            "bader"
+        ]
+    },
+    {
+        "id": "qr6",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr6",
+        "qr_data": {
+            "id": "qr6",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr6.png"
+        },
+        "message": "admin",
+        "time": "2025-06-29 19:32:13",
+        "expire_in": "5 hours",
+        "read": true,
+        "deleted_by": []
+    },
+    {
+        "id": "qr14",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr14",
+        "qr_data": {
+            "id": "qr14",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "hh",
+            "password": "dd",
+            "image_path": "images/qr14.png"
+        },
+        "message": "admin12",
+        "time": "2025-06-29 19:32:39",
+        "expire_in": "1 hours",
+        "read": true,
+        "deleted_by": [
+            "bader"
+        ]
+    }
+]

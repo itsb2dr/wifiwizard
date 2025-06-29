@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="main-container">
+  <div class="form-section">
+    {% include 'partials/alerts.html' %}
+    <form id="qrForm" method="post" enctype="multipart/form-data">
+      <h2>Generate QR Code</h2>
+      <label>SSID</label>
+      <input type="text" name="ssid" id="ssid" required>
+      <label>Password</label>
+      <input type="text" name="password" id="password" required>
+      <label>Upload Logo</label>
+      <input type="file" name="logo" id="logo">
+      <label>Foreground Color</label>
+      <input type="color" name="fgColor" id="fgColor">
+      <label>Background Color</label>
+      <input type="color" name="bgColor" id="bgColor">
+      <label>Text</label>
+      <input type="text" id="scanText" value="SCAN ME">
+      <label>Text Color</label>
+      <input type="color" id="textColor">
+      <label>Font Size</label>
+      <input type="number" id="fontSize" value="28">
+      <label><input type="checkbox" id="addBorder"> Add Border</label>
+      <label>Border Color</label>
+      <input type="color" id="borderColor">
+      <label>Border Thickness</label>
+      <input type="number" id="borderThickness" value="10">
+      <div class="button-group">
+        <button type="submit" class="btn">Save QR</button>
+        <button type="button" class="btn btn-secondary" onclick="resetForm()">Reset</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="preview-section">
+    <canvas id="qrCanvas" width="300" height="300"></canvas>
+    <p id="scan-label">SCAN ME</p>
+    <a id="downloadBtn" href="#" download="wifi_qr.png" class="download-btn" style="display:none;">Click Here To Download</a>
+  </div>
+</div>
+
+<div class="faq-section">
+  <h2>WiFi QR Code Generator</h2>
+
+  <div class="faq-item">
+    <h3>Why do I need a WiFi QR Code generator?</h3>
+    <p>Before this, there was no other way to join a WiFi network without manually selecting one and entering a password. This QR Code lets you join instantly.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>My WiFi network is hidden, can I still create a QR Code?</h3>
+    <p>Absolutely. Just tick the “Hidden” checkbox next to the SSID field in our QR generator. Most routers support this feature.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Which security protocol do I need for my WiFi? WPA/WPA2, WEP or None?</h3>
+    <p>WPA/WPA2 is the most secure and widely supported option. Use it unless you're dealing with legacy devices.</p>
+  </div>
+</div>
+
+<div id="login-required-alert" class="alert alert-warning" style="display:none;">
+  Please log in to generate a QR Code.
+</div>
+{% endblock %}

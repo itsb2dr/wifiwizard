@@ -1,0 +1,10 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+
+<div id="chat-icon" onclick="toggleChatPanel()">
+  💬
+</div>
+
+<div id="chat-panel" style="display: none;">
+  <iframe src="{{ url_for('chat.chat') }}"></iframe>
+</div>

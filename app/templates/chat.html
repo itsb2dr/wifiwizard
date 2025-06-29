@@ -1,0 +1,235 @@
+{% set expiration_display_map = {
+  "0": "Never", "1": "1 Minute", "5": "5 Minutes", "10": "10 Minutes", "15": "15 Minutes",
+  "30": "30 Minutes", "60": "1 Hour", "180": "3 Hours", "300": "5 Hours", "720": "12 Hours",
+  "1440": "1 Day", "4320": "3 Days", "10080": "7 Days", "21600": "15 Days", "43200": "30 Days"
+} %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Panel</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+  <style>
+    .qr-toggle-btn, .delete-btn {
+      margin: 8px 0;
+      padding: 6px 12px;
+      font-size: 0.9em;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      background: #f1f1f1;
+      border-radius: 6px;
+      transition: background-color 0.2s ease-in-out;
+    }
+    .qr-toggle-btn:hover, .delete-btn:hover { background-color: #e0e0e0; }
+    .qr-img { display: none; margin-top: 10px; border-radius: 6px; border: 1px dashed #ccc; }
+    .download-btn { display: none; margin-top: 5px; }
+    .search-bar input {
+      width: 100%; padding: 6px 10px; font-size: 0.9em;
+      border: 1px solid #ccc; border-radius: 6px; margin-bottom: 12px;
+    }
+    .seen-status {
+      font-size: 0.85em;
+      font-weight: bold;
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+    }
+    .seen-true { color: green; }
+    .seen-false { color: orange; }
+    .message-box {
+      border: 2px solid #ddd; border-radius: 10px;
+      padding: 12px; margin-bottom: 12px;
+      background-color: white; position: relative;
+      transition: all 0.3s ease-in-out;
+      min-height: 120px;
+    }
+    .received { background-color: #e6ffe6; border-color: #99e699; }
+    .expired {
+      background-color: #f2f2f2 !important;
+      border-color: #ccc !important;
+      color: #777 !important;
+    }
+    .expire-info { font-size: 0.75em; color: #777; margin-top: 4px; }
+    .countdown { font-size: 0.75em; color: #999; font-style: italic; margin-top: 4px; }
+    #chat-icon-wrapper { position: relative; font-size: 28px; }
+    #red-dot {
+      position: absolute; top: -3px; right: -3px;
+      width: 10px; height: 10px; background: red;
+      border-radius: 50%; display: none;
+    }
+  </style>
+</head>
+<body>
+<div class="chat-page">
+  <div class="chat-container styled-chat-box">
+
+    <div class="chat-header">
+      <h2>👋 Welcome, <span class="username">{{ my_username }}</span></h2>
+    </div>
+
+    <div class="share-form styled-share">
+      <h3>Share a QR Code</h3>
+      <form method="POST">
+        <input type="text" name="recipient" placeholder="Recipient Username" required>
+        <select name="qr_id" required>
+          <option value="" disabled selected>Select a QR Code</option>
+          {% for qr in my_qrs %}
+            <option value="{{ qr['id'] }}">{{ qr['ssid'] }} ({{ qr['id'] }})</option>
+          {% endfor %}
+        </select>
+        <textarea name="message" placeholder="Add a message (optional)..."></textarea>
+        <select name="expire_in" required>
+          {% for val, label in expiration_display_map.items() %}
+            <option value="{{ val }}">{{ label }}</option>
+          {% endfor %}
+        </select>        
+        <button type="submit" class="share-btn">Send QR</button>
+      </form>
+    </div>
+
+    {% include 'partials/alerts.html' %}
+
+    <div class="inbox styled-inbox">
+      <h3>Your Inbox</h3>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search by message, username, or SSID...">
+      </div>
+
+      {% if inbox %}
+        <div id="messagesList">
+          {% for msg in inbox %}
+            <div class="message-box {% if msg['from'] != my_username %}received{% endif %}"
+                 data-id="{{ msg['id'] }}"
+                 data-from="{{ msg['from'] }}"
+                 data-ssid="{{ msg['qr_data']['ssid'] }}"
+                 data-message="{{ msg['message'] }}"
+                 data-expire="{{ msg['expire_in'] }}"
+                 data-time="{{ msg['time'] }}">
+              <div class="message-header">
+                <p><strong>From:</strong> {{ 'You' if msg['from'] == my_username else msg['from'] }}</p>
+                <p class="timestamp">{{ msg['time'] }}</p>
+              </div>
+              <div class="message-content">
+                <p><strong>Message:</strong> {{ msg['message'] or 'No message.' }}</p>
+                <p><strong>QR SSID:</strong> {{ msg['qr_data']['ssid'] }}</p>
+              </div>
+
+              {% if msg['expire_in'] and msg['expire_in'] != "0" %}
+                <p class="expire-info">Expires in {{ expiration_display_map[msg['expire_in']] if msg['expire_in'] in expiration_display_map else msg['expire_in'] }}</p>
+                <p class="countdown"></p>
+              {% endif %}
+
+              <button class="qr-toggle-btn" onclick="toggleQR(this)">Click to see QR Code</button>
+              <img src="{{ url_for('static', filename=msg['qr_data']['image_path']) }}" alt="Shared QR" class="qr-img">
+              <a class="download-btn" href="{{ url_for('static', filename=msg['qr_data']['image_path']) }}" download>Download QR</a>
+
+              <p class="seen-status {{ 'seen-true' if msg['read'] else 'seen-false' }}">{{ 'Seen' if msg['read'] else 'Unseen' }}</p>
+
+              <button class="delete-btn" onclick="deleteMessage('{{ msg.id }}', this)">Delete</button>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="no-messages">No messages yet.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleQR(btn) {
+    const img = btn.nextElementSibling;
+    const link = img.nextElementSibling;
+    const isVisible = img.style.display === 'block';
+    img.style.display = isVisible ? 'none' : 'block';
+    link.style.display = isVisible ? 'none' : 'inline-block';
+    btn.textContent = isVisible ? 'Click to see QR Code' : 'Hide QR Code';
+  }
+
+  document.getElementById('searchInput').addEventListener('input', function () {
+    const term = this.value.toLowerCase();
+    document.querySelectorAll('.message-box').forEach(box => {
+      const from = box.dataset.from?.toLowerCase() || '';
+      const ssid = box.dataset.ssid?.toLowerCase() || '';
+      const message = box.dataset.message?.toLowerCase() || '';
+      box.style.display = (from.includes(term) || ssid.includes(term) || message.includes(term)) ? 'block' : 'none';
+    });
+  });
+
+  function deleteMessage(msgId, btn) {
+    fetch('/chat/delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ delete_id: msgId })
+    }).then(res => {
+      if (res.ok) {
+        const messageBox = btn.closest('.message-box');
+        if (messageBox) messageBox.remove();
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".message-box").forEach(box => {
+      const expireMin = parseInt(box.dataset.expire);
+      const sentTime = new Date(box.dataset.time.replace(" ", "T"));
+      if (!expireMin || isNaN(expireMin) || expireMin === 0) return;
+      const expiresAt = new Date(sentTime.getTime() + expireMin * 60000);
+      if (new Date() > expiresAt) box.remove();
+    });
+
+    if (localStorage.getItem("chat_seen") !== "true") {
+      fetch("/chat/has_new")
+        .then(res => res.json())
+        .then(data => {
+          if (data.new_messages) {
+            const dot = document.getElementById("red-dot");
+            if (dot) dot.style.display = "inline-block";
+          }
+        });
+    }
+
+    setupExpirationTimers();
+  });
+
+  function setupExpirationTimers() {
+    document.querySelectorAll(".message-box").forEach(box => {
+      const expireMin = parseInt(box.dataset.expire);
+      const sentTime = new Date(box.dataset.time.replace(" ", "T"));
+      if (!expireMin || isNaN(expireMin) || expireMin === 0) return;
+
+      const expiresAt = new Date(sentTime.getTime() + expireMin * 60000);
+      const cd = box.querySelector('.countdown');
+
+      const interval = setInterval(() => {
+        const now = new Date();
+        const diff = expiresAt - now;
+
+        if (diff <= 0) {
+          clearInterval(interval);
+          box.classList.add("expired");
+          box.innerHTML = `<p style="font-size: 0.8em; color: #888; margin: 0;">⏱ This message has expired.</p>`;
+        } else {
+          const totalSeconds = Math.floor(diff / 1000);
+          const days = Math.floor(totalSeconds / (3600 * 24));
+          const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+          const minutes = Math.floor((totalSeconds % 3600) / 60);
+          const seconds = totalSeconds % 60;
+
+          if (cd) {
+            let display = " Time left: ";
+            if (days > 0) display += `${days}d `;
+            if (days > 0 || hours > 0) display += `${hours}h `;
+            display += `${minutes}m ${seconds}s`;
+            cd.textContent = display;
+            cd.title = `Expires at ${expiresAt.toLocaleString()}`;
+          }
+        }
+      }, 1000);
+    });
+  }
+</script>
+</body>
+</html>

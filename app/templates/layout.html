@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>WiFi WIZARD</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+  <style>
+    .main-header {
+      position: relative;
+      background: white;
+      border-bottom: 1px solid #ddd;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo img {
+      height: 70px;
+    }
+
+    .logo span {
+      font-size: 32px;
+      font-weight: 900;
+      color: #0a0a23;
+      text-shadow: 0 0 4px #9e9eff;
+    }
+
+    .nav-auth {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .highlight-btn {
+      background-color: #00bfff;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .highlight-btn:hover {
+      background-color: #0099cc;
+    }
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="logo">
+      <a href="/">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="WiFi Wizard Logo">
+      </a>
+      <span>WIFI WIZARD</span>
+    </div>
+    <div class="nav-auth">
+      {% if current_user.is_authenticated %}
+        {% if current_user.role == 'admin' %}
+          <a href="{{ url_for('admin.dashboard') }}">Admin Panel</a>
+        {% endif %}
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+      {% else %}
+        <a href="{{ url_for('auth.login') }}">Log in</a>
+        <a href="{{ url_for('auth.register') }}" class="highlight-btn">Create Free Account</a>
+      {% endif %}
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  {% if current_user.is_authenticated and request.endpoint != 'chat.chat' %}
+    <div id="chat-icon" onclick="toggleChatPanel()">
+      💬
+      <span id="new-msg-dot"></span>
+    </div>
+    <div id="chat-panel" style="display: none;">
+      <iframe src="{{ url_for('chat.chat') }}"></iframe>
+    </div>
+  {% endif %}
+
+  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>

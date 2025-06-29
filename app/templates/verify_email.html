@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="auth-page">
+  <div class="auth-container">
+    <h2>Verify Your Email</h2>
+    <form method="POST">
+      <p style="margin-bottom: 14px;">We sent a 6-digit verification code to <strong>{{ email }}</strong></p>
+      <input type="text" name="code" placeholder="Enter verification code" required>
+      <button type="submit">Verify</button>
+    </form>
+    <div style="margin-top: 18px;">
+      {% include 'partials/alerts.html' %}
+    </div>
+  </div>
+</div>
+{% endblock %}
