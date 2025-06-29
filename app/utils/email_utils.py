@@ -2,7 +2,7 @@ import smtplib
 from email.message import EmailMessage
 
 EMAIL_ADDRESS = 'officialwifiwizard@gmail.com'
-EMAIL_PASSWORD = 'qzlpwmqzascuvobc'  # Use an app password if using Gmail
+EMAIL_PASSWORD = 'svtnceepxiywivci'  # Use an app password if using Gmail
 
 def send_email(to_email, subject, content):
     msg = EmailMessage()
