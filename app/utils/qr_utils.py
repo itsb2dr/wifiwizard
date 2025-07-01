@@ -5,7 +5,7 @@ from PIL import Image
 from io import BytesIO
 
 QR_DB = 'qrcodes.json'
-IMAGE_DIR = 'app/static/images'
+IMAGE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static', 'images'))
 
 def generate_qr_with_logo(ssid, password, canvas_data_base64, user_id, scan_text):
     qr_id = get_next_qr_id()
