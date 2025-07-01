@@ -11,55 +11,6 @@
   <title>Chat Panel</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
-  <style>
-    .qr-toggle-btn, .delete-btn {
-      margin: 8px 0;
-      padding: 6px 12px;
-      font-size: 0.9em;
-      cursor: pointer;
-      border: 1px solid #ccc;
-      background: #f1f1f1;
-      border-radius: 6px;
-      transition: background-color 0.2s ease-in-out;
-    }
-    .qr-toggle-btn:hover, .delete-btn:hover { background-color: #e0e0e0; }
-    .qr-img { display: none; margin-top: 10px; border-radius: 6px; border: 1px dashed #ccc; }
-    .download-btn { display: none; margin-top: 5px; }
-    .search-bar input {
-      width: 100%; padding: 6px 10px; font-size: 0.9em;
-      border: 1px solid #ccc; border-radius: 6px; margin-bottom: 12px;
-    }
-    .seen-status {
-      font-size: 0.85em;
-      font-weight: bold;
-      position: absolute;
-      bottom: 8px;
-      right: 10px;
-    }
-    .seen-true { color: green; }
-    .seen-false { color: orange; }
-    .message-box {
-      border: 2px solid #ddd; border-radius: 10px;
-      padding: 12px; margin-bottom: 12px;
-      background-color: white; position: relative;
-      transition: all 0.3s ease-in-out;
-      min-height: 120px;
-    }
-    .received { background-color: #e6ffe6; border-color: #99e699; }
-    .expired {
-      background-color: #f2f2f2 !important;
-      border-color: #ccc !important;
-      color: #777 !important;
-    }
-    .expire-info { font-size: 0.75em; color: #777; margin-top: 4px; }
-    .countdown { font-size: 0.75em; color: #999; font-style: italic; margin-top: 4px; }
-    #chat-icon-wrapper { position: relative; font-size: 28px; }
-    #red-dot {
-      position: absolute; top: -3px; right: -3px;
-      width: 10px; height: 10px; background: red;
-      border-radius: 50%; display: none;
-    }
-  </style>
 </head>
 <body>
 <div class="chat-page">
@@ -105,7 +56,7 @@
                  data-from="{{ msg['from'] }}"
                  data-ssid="{{ msg['qr_data']['ssid'] }}"
                  data-message="{{ msg['message'] }}"
-                 data-expire="{{ msg['expire_in'] }}"
+                 data-expire="{{ msg['expire_min'] }}"
                  data-time="{{ msg['time'] }}">
               <div class="message-header">
                 <p><strong>From:</strong> {{ 'You' if msg['from'] == my_username else msg['from'] }}</p>
@@ -116,8 +67,8 @@
                 <p><strong>QR SSID:</strong> {{ msg['qr_data']['ssid'] }}</p>
               </div>
 
-              {% if msg['expire_in'] and msg['expire_in'] != "0" %}
-                <p class="expire-info">Expires in {{ expiration_display_map[msg['expire_in']] if msg['expire_in'] in expiration_display_map else msg['expire_in'] }}</p>
+              {% if msg['expire_min'] and msg['expire_min'] != 0 %}
+                <p class="expire-info">Expires in {{ msg['expire_in'] }}</p>
                 <p class="countdown"></p>
               {% endif %}
 
@@ -172,25 +123,6 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".message-box").forEach(box => {
-      const expireMin = parseInt(box.dataset.expire);
-      const sentTime = new Date(box.dataset.time.replace(" ", "T"));
-      if (!expireMin || isNaN(expireMin) || expireMin === 0) return;
-      const expiresAt = new Date(sentTime.getTime() + expireMin * 60000);
-      if (new Date() > expiresAt) box.remove();
-    });
-
-    if (localStorage.getItem("chat_seen") !== "true") {
-      fetch("/chat/has_new")
-        .then(res => res.json())
-        .then(data => {
-          if (data.new_messages) {
-            const dot = document.getElementById("red-dot");
-            if (dot) dot.style.display = "inline-block";
-          }
-        });
-    }
-
     setupExpirationTimers();
   });
 

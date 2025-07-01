@@ -382,5 +382,12 @@
         "password": "FF",
         "image_path": "images/qr245.png",
         "scan_text": "SCAN ME"
+    },
+    "qr246": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "aa",
+        "password": "aa",
+        "image_path": "images/qr246.png",
+        "scan_text": "SCAN ME"
     }
 }

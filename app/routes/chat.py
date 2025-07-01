@@ -78,12 +78,11 @@ def convert_to_label(minutes):
 
 def is_expired(msg):
     try:
-        expire_in = msg.get("expire_in")
-        if not expire_in or expire_in == "0" or expire_in.lower() == "never":
+        expire_min = int(msg.get("expire_min", 0))
+        if expire_min == 0:
             return False
         sent_time = datetime.strptime(msg.get("time"), "%Y-%m-%d %H:%M:%S")
-        expire_minutes = parse_minutes(expire_in)
-        return datetime.now() > sent_time + timedelta(minutes=expire_minutes)
+        return datetime.now() > sent_time + timedelta(minutes=expire_min)
     except:
         return False
 
@@ -118,7 +117,8 @@ def chat():
             flash("Recipient username not found.", "danger")
             return redirect(url_for('chat.chat'))
 
-        expire_label = convert_to_label(int(expire_value)) if expire_value.isdigit() else expire_value
+        expire_minutes = parse_minutes(expire_value)
+        expire_label = convert_to_label(expire_minutes)
 
         all_messages.append({
             "id": qr_id,
@@ -129,12 +129,12 @@ def chat():
             "message": message,
             "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "expire_in": expire_label,
+            "expire_min": expire_minutes,
             "read": False,
             "deleted_by": []
         })
         save_messages(all_messages)
         flash("QR Code shared successfully.", "success")
-        session.modified = True
         return redirect(url_for('chat.chat'))
 
     updated = False
