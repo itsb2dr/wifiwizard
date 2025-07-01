@@ -16,6 +16,10 @@ def generate_qr_with_logo(ssid, password, canvas_data_base64, user_id, scan_text
     os.makedirs(IMAGE_DIR, exist_ok=True)
 
     try:
+        if not canvas_data_base64 or "," not in canvas_data_base64:
+            print("QR Save Error: Invalid canvas data.")
+            return None
+
         img_data = base64.b64decode(canvas_data_base64.split(",")[1])
         img = Image.open(BytesIO(img_data))
         img.save(img_path)
