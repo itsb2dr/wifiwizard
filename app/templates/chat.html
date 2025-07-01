@@ -35,7 +35,7 @@
           {% for val, label in expiration_display_map.items() %}
             <option value="{{ val }}">{{ label }}</option>
           {% endfor %}
-        </select>        
+        </select>
         <button type="submit" class="share-btn">Send QR</button>
       </form>
     </div>
@@ -56,7 +56,7 @@
                  data-from="{{ msg['from'] }}"
                  data-ssid="{{ msg['qr_data']['ssid'] }}"
                  data-message="{{ msg['message'] }}"
-                 data-expire="{{ msg['expire_min'] }}"
+                 data-expire="{{ msg['expire_in'] }}"
                  data-time="{{ msg['time'] }}">
               <div class="message-header">
                 <p><strong>From:</strong> {{ 'You' if msg['from'] == my_username else msg['from'] }}</p>
@@ -67,8 +67,8 @@
                 <p><strong>QR SSID:</strong> {{ msg['qr_data']['ssid'] }}</p>
               </div>
 
-              {% if msg['expire_min'] and msg['expire_min'] != 0 %}
-                <p class="expire-info">Expires in {{ msg['expire_in'] }}</p>
+              {% if msg['expire_in'] and msg['expire_in'] != "0" %}
+                <p class="expire-info">Expires in {{ msg['expire_in'] }} minutes</p>
                 <p class="countdown"></p>
               {% endif %}
 
@@ -90,78 +90,77 @@
 </div>
 
 <script>
-  function toggleQR(btn) {
-    const img = btn.nextElementSibling;
-    const link = img.nextElementSibling;
-    const isVisible = img.style.display === 'block';
-    img.style.display = isVisible ? 'none' : 'block';
-    link.style.display = isVisible ? 'none' : 'inline-block';
-    btn.textContent = isVisible ? 'Click to see QR Code' : 'Hide QR Code';
-  }
+// Toggle QR display
+function toggleQR(btn) {
+  const img = btn.nextElementSibling;
+  const link = img.nextElementSibling;
+  const show = img.style.display !== 'block';
+  img.style.display = show ? 'block' : 'none';
+  link.style.display = show ? 'inline-block' : 'none';
+  btn.textContent = show ? 'Hide QR Code' : 'Click to see QR Code';
+}
 
-  document.getElementById('searchInput').addEventListener('input', function () {
-    const term = this.value.toLowerCase();
-    document.querySelectorAll('.message-box').forEach(box => {
-      const from = box.dataset.from?.toLowerCase() || '';
-      const ssid = box.dataset.ssid?.toLowerCase() || '';
-      const message = box.dataset.message?.toLowerCase() || '';
-      box.style.display = (from.includes(term) || ssid.includes(term) || message.includes(term)) ? 'block' : 'none';
-    });
+// Search filter
+document.getElementById('searchInput').addEventListener('input', function () {
+  const term = this.value.toLowerCase();
+  document.querySelectorAll('.message-box').forEach(box => {
+    const from = box.dataset.from?.toLowerCase() || '';
+    const ssid = box.dataset.ssid?.toLowerCase() || '';
+    const message = box.dataset.message?.toLowerCase() || '';
+    box.style.display = (from.includes(term) || ssid.includes(term) || message.includes(term)) ? 'block' : 'none';
   });
+});
 
-  function deleteMessage(msgId, btn) {
-    fetch('/chat/delete', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ delete_id: msgId })
-    }).then(res => {
-      if (res.ok) {
-        const messageBox = btn.closest('.message-box');
-        if (messageBox) messageBox.remove();
-      }
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    setupExpirationTimers();
+// Delete message
+function deleteMessage(msgId, btn) {
+  fetch('/chat/delete', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ delete_id: msgId })
+  }).then(res => {
+    if (res.ok) {
+      const box = btn.closest('.message-box');
+      if (box) box.remove();
+    }
   });
+}
 
-  function setupExpirationTimers() {
-    document.querySelectorAll(".message-box").forEach(box => {
-      const expireMin = parseInt(box.dataset.expire);
-      const sentTime = new Date(box.dataset.time.replace(" ", "T"));
-      if (!expireMin || isNaN(expireMin) || expireMin === 0) return;
+// Countdown for expiration
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".message-box").forEach(box => {
+    const expireMin = parseInt(box.dataset.expire);
+    const sentTime = new Date(box.dataset.time.replace(" ", "T"));
+    if (!expireMin || isNaN(expireMin) || expireMin === 0) return;
+    const expiresAt = new Date(sentTime.getTime() + expireMin * 60000);
+    const cd = box.querySelector('.countdown');
 
-      const expiresAt = new Date(sentTime.getTime() + expireMin * 60000);
-      const cd = box.querySelector('.countdown');
+    const interval = setInterval(() => {
+      const now = new Date();
+      const diff = expiresAt - now;
 
-      const interval = setInterval(() => {
-        const now = new Date();
-        const diff = expiresAt - now;
+      if (diff <= 0) {
+        clearInterval(interval);
+        box.classList.add("expired");
+        box.innerHTML = `<p style="font-size: 0.8em; color: #888; margin: 0;">⏱ This message has expired.</p>`;
+      } else {
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / (3600 * 24));
+        const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
 
-        if (diff <= 0) {
-          clearInterval(interval);
-          box.classList.add("expired");
-          box.innerHTML = `<p style="font-size: 0.8em; color: #888; margin: 0;">⏱ This message has expired.</p>`;
-        } else {
-          const totalSeconds = Math.floor(diff / 1000);
-          const days = Math.floor(totalSeconds / (3600 * 24));
-          const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-          const minutes = Math.floor((totalSeconds % 3600) / 60);
-          const seconds = totalSeconds % 60;
-
-          if (cd) {
-            let display = " Time left: ";
-            if (days > 0) display += `${days}d `;
-            if (days > 0 || hours > 0) display += `${hours}h `;
-            display += `${minutes}m ${seconds}s`;
-            cd.textContent = display;
-            cd.title = `Expires at ${expiresAt.toLocaleString()}`;
-          }
+        if (cd) {
+          let display = "Time left: ";
+          if (days > 0) display += `${days}d `;
+          if (days > 0 || hours > 0) display += `${hours}h `;
+          display += `${minutes}m ${seconds}s`;
+          cd.textContent = display;
+          cd.title = "Expires at " + expiresAt.toLocaleString();
         }
-      }, 1000);
-    });
-  }
+      }
+    }, 1000);
+  });
+});
 </script>
 </body>
 </html>
