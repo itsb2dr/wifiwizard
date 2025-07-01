@@ -1,4 +1,3 @@
-# app/routes/chat.py
 import os
 import json
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify, session
@@ -58,15 +57,32 @@ def parse_minutes(expire_value):
     return 0
 
 
+def convert_to_label(minutes):
+    if minutes == 0:
+        return "Never"
+    if minutes < 60:
+        return f"{minutes} minutes"
+    elif minutes < 1440:
+        return f"{minutes // 60} hours"
+    else:
+        days = minutes // 1440
+        hours = (minutes % 1440) // 60
+        mins = minutes % 60
+        label = f"{days} days"
+        if hours > 0:
+            label += f" {hours} hrs"
+        if mins > 0:
+            label += f" {mins} mins"
+        return label
+
+
 def is_expired(msg):
     try:
         expire_in = msg.get("expire_in")
-        if isinstance(expire_in, str) and not expire_in.isdigit():
-            return False  # not a numeric value, skip expiration
-        expire_minutes = int(expire_in)
-        if expire_minutes == 0:
+        if not expire_in or expire_in == "0" or expire_in.lower() == "never":
             return False
         sent_time = datetime.strptime(msg.get("time"), "%Y-%m-%d %H:%M:%S")
+        expire_minutes = parse_minutes(expire_in)
         return datetime.now() > sent_time + timedelta(minutes=expire_minutes)
     except:
         return False
@@ -102,6 +118,9 @@ def chat():
             flash("Recipient username not found.", "danger")
             return redirect(url_for('chat.chat'))
 
+        # ✅ FIXED THIS LINE ONLY
+        expire_label = convert_to_label(parse_minutes(expire_value))
+
         all_messages.append({
             "id": qr_id,
             "from": my_username,
@@ -110,7 +129,7 @@ def chat():
             "qr_data": qr_entry,
             "message": message,
             "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "expire_in": str(parse_minutes(expire_value)),  # ✅ SAVE AS MINUTES STRING
+            "expire_in": expire_label,
             "read": False,
             "deleted_by": []
         })
@@ -131,8 +150,41 @@ def chat():
         m for m in all_messages
         if (m.get('to') == my_username or m.get('from') == my_username)
         and my_username not in m.get('deleted_by', [])
-        and not is_expired(m)  # ✅ THIS IS FIXED TOO
+        and not is_expired(m)
     ]
     my_qrs = [q for q in all_qrcodes if q.get('user_id') == my_email]
 
     return render_template('chat.html', my_username=my_username, inbox=inbox, my_qrs=my_qrs)
+
+
+@chat_bp.route('/has_new')
+@login_required
+def has_new():
+    users = load_users()
+    all_messages = load_messages()
+    my_username = users.get(current_user.id, {}).get("username")
+    new_messages = any(
+        m.get('to') == my_username and not m.get('read') and my_username not in m.get('deleted_by', []) and not is_expired(m)
+        for m in all_messages
+    )
+    return {"new_messages": new_messages}
+
+
+@chat_bp.route('/delete', methods=['POST'])
+@login_required
+def delete_message():
+    users = load_users()
+    all_messages = load_messages()
+    my_username = users.get(current_user.id, {}).get("username")
+    data = request.get_json()
+    delete_id = data.get('delete_id')
+
+    for msg in all_messages:
+        if msg.get('id') == delete_id:
+            if 'deleted_by' not in msg:
+                msg['deleted_by'] = []
+            if my_username not in msg['deleted_by']:
+                msg['deleted_by'].append(my_username)
+
+    save_messages(all_messages)
+    return '', 204

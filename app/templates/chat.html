@@ -11,6 +11,55 @@
   <title>Chat Panel</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+  <style>
+    .qr-toggle-btn, .delete-btn {
+      margin: 8px 0;
+      padding: 6px 12px;
+      font-size: 0.9em;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      background: #f1f1f1;
+      border-radius: 6px;
+      transition: background-color 0.2s ease-in-out;
+    }
+    .qr-toggle-btn:hover, .delete-btn:hover { background-color: #e0e0e0; }
+    .qr-img { display: none; margin-top: 10px; border-radius: 6px; border: 1px dashed #ccc; }
+    .download-btn { display: none; margin-top: 5px; }
+    .search-bar input {
+      width: 100%; padding: 6px 10px; font-size: 0.9em;
+      border: 1px solid #ccc; border-radius: 6px; margin-bottom: 12px;
+    }
+    .seen-status {
+      font-size: 0.85em;
+      font-weight: bold;
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+    }
+    .seen-true { color: green; }
+    .seen-false { color: orange; }
+    .message-box {
+      border: 2px solid #ddd; border-radius: 10px;
+      padding: 12px; margin-bottom: 12px;
+      background-color: white; position: relative;
+      transition: all 0.3s ease-in-out;
+      min-height: 120px;
+    }
+    .received { background-color: #e6ffe6; border-color: #99e699; }
+    .expired {
+      background-color: #f2f2f2 !important;
+      border-color: #ccc !important;
+      color: #777 !important;
+    }
+    .expire-info { font-size: 0.75em; color: #777; margin-top: 4px; }
+    .countdown { font-size: 0.75em; color: #999; font-style: italic; margin-top: 4px; }
+    #chat-icon-wrapper { position: relative; font-size: 28px; }
+    #red-dot {
+      position: absolute; top: -3px; right: -3px;
+      width: 10px; height: 10px; background: red;
+      border-radius: 50%; display: none;
+    }
+  </style>
 </head>
 <body>
 <div class="chat-page">
@@ -35,7 +84,7 @@
           {% for val, label in expiration_display_map.items() %}
             <option value="{{ val }}">{{ label }}</option>
           {% endfor %}
-        </select>
+        </select>        
         <button type="submit" class="share-btn">Send QR</button>
       </form>
     </div>
@@ -68,7 +117,7 @@
               </div>
 
               {% if msg['expire_in'] and msg['expire_in'] != "0" %}
-                <p class="expire-info">Expires in {{ msg['expire_in'] }} minutes</p>
+                <p class="expire-info">Expires in {{ expiration_display_map[msg['expire_in']] if msg['expire_in'] in expiration_display_map else msg['expire_in'] }}</p>
                 <p class="countdown"></p>
               {% endif %}
 
@@ -90,77 +139,97 @@
 </div>
 
 <script>
-// Toggle QR display
-function toggleQR(btn) {
-  const img = btn.nextElementSibling;
-  const link = img.nextElementSibling;
-  const show = img.style.display !== 'block';
-  img.style.display = show ? 'block' : 'none';
-  link.style.display = show ? 'inline-block' : 'none';
-  btn.textContent = show ? 'Hide QR Code' : 'Click to see QR Code';
-}
+  function toggleQR(btn) {
+    const img = btn.nextElementSibling;
+    const link = img.nextElementSibling;
+    const isVisible = img.style.display === 'block';
+    img.style.display = isVisible ? 'none' : 'block';
+    link.style.display = isVisible ? 'none' : 'inline-block';
+    btn.textContent = isVisible ? 'Click to see QR Code' : 'Hide QR Code';
+  }
 
-// Search filter
-document.getElementById('searchInput').addEventListener('input', function () {
-  const term = this.value.toLowerCase();
-  document.querySelectorAll('.message-box').forEach(box => {
-    const from = box.dataset.from?.toLowerCase() || '';
-    const ssid = box.dataset.ssid?.toLowerCase() || '';
-    const message = box.dataset.message?.toLowerCase() || '';
-    box.style.display = (from.includes(term) || ssid.includes(term) || message.includes(term)) ? 'block' : 'none';
+  document.getElementById('searchInput').addEventListener('input', function () {
+    const term = this.value.toLowerCase();
+    document.querySelectorAll('.message-box').forEach(box => {
+      const from = box.dataset.from?.toLowerCase() || '';
+      const ssid = box.dataset.ssid?.toLowerCase() || '';
+      const message = box.dataset.message?.toLowerCase() || '';
+      box.style.display = (from.includes(term) || ssid.includes(term) || message.includes(term)) ? 'block' : 'none';
+    });
   });
-});
 
-// Delete message
-function deleteMessage(msgId, btn) {
-  fetch('/chat/delete', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ delete_id: msgId })
-  }).then(res => {
-    if (res.ok) {
-      const box = btn.closest('.message-box');
-      if (box) box.remove();
-    }
-  });
-}
-
-// Countdown for expiration
-document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll(".message-box").forEach(box => {
-    const expireMin = parseInt(box.dataset.expire);
-    const sentTime = new Date(box.dataset.time.replace(" ", "T"));
-    if (!expireMin || isNaN(expireMin) || expireMin === 0) return;
-    const expiresAt = new Date(sentTime.getTime() + expireMin * 60000);
-    const cd = box.querySelector('.countdown');
-
-    const interval = setInterval(() => {
-      const now = new Date();
-      const diff = expiresAt - now;
-
-      if (diff <= 0) {
-        clearInterval(interval);
-        box.classList.add("expired");
-        box.innerHTML = `<p style="font-size: 0.8em; color: #888; margin: 0;">⏱ This message has expired.</p>`;
-      } else {
-        const totalSeconds = Math.floor(diff / 1000);
-        const days = Math.floor(totalSeconds / (3600 * 24));
-        const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
-
-        if (cd) {
-          let display = "Time left: ";
-          if (days > 0) display += `${days}d `;
-          if (days > 0 || hours > 0) display += `${hours}h `;
-          display += `${minutes}m ${seconds}s`;
-          cd.textContent = display;
-          cd.title = "Expires at " + expiresAt.toLocaleString();
-        }
+  function deleteMessage(msgId, btn) {
+    fetch('/chat/delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ delete_id: msgId })
+    }).then(res => {
+      if (res.ok) {
+        const messageBox = btn.closest('.message-box');
+        if (messageBox) messageBox.remove();
       }
-    }, 1000);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".message-box").forEach(box => {
+      const expireMin = parseInt(box.dataset.expire);
+      const sentTime = new Date(box.dataset.time.replace(" ", "T"));
+      if (!expireMin || isNaN(expireMin) || expireMin === 0) return;
+      const expiresAt = new Date(sentTime.getTime() + expireMin * 60000);
+      if (new Date() > expiresAt) box.remove();
+    });
+
+    if (localStorage.getItem("chat_seen") !== "true") {
+      fetch("/chat/has_new")
+        .then(res => res.json())
+        .then(data => {
+          if (data.new_messages) {
+            const dot = document.getElementById("red-dot");
+            if (dot) dot.style.display = "inline-block";
+          }
+        });
+    }
+
+    setupExpirationTimers();
   });
-});
+
+  function setupExpirationTimers() {
+    document.querySelectorAll(".message-box").forEach(box => {
+      const expireMin = parseInt(box.dataset.expire);
+      const sentTime = new Date(box.dataset.time.replace(" ", "T"));
+      if (!expireMin || isNaN(expireMin) || expireMin === 0) return;
+
+      const expiresAt = new Date(sentTime.getTime() + expireMin * 60000);
+      const cd = box.querySelector('.countdown');
+
+      const interval = setInterval(() => {
+        const now = new Date();
+        const diff = expiresAt - now;
+
+        if (diff <= 0) {
+          clearInterval(interval);
+          box.classList.add("expired");
+          box.innerHTML = `<p style="font-size: 0.8em; color: #888; margin: 0;">⏱ This message has expired.</p>`;
+        } else {
+          const totalSeconds = Math.floor(diff / 1000);
+          const days = Math.floor(totalSeconds / (3600 * 24));
+          const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+          const minutes = Math.floor((totalSeconds % 3600) / 60);
+          const seconds = totalSeconds % 60;
+
+          if (cd) {
+            let display = " Time left: ";
+            if (days > 0) display += `${days}d `;
+            if (days > 0 || hours > 0) display += `${hours}h `;
+            display += `${minutes}m ${seconds}s`;
+            cd.textContent = display;
+            cd.title = `Expires at ${expiresAt.toLocaleString()}`;
+          }
+        }
+      }, 1000);
+    });
+  }
 </script>
 </body>
 </html>
