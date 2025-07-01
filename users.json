@@ -14,21 +14,5 @@
         "is_verified": true,
         "verification_code": null,
         "reset_code": null
-    },
-    "solospot96@gmail.com": {
-        "username": "aa",
-        "password": "aa",
-        "role": "user",
-        "is_verified": false,
-        "verification_code": "499357",
-        "reset_code": null
-    },
-    "solospot36@gmail.com": {
-        "username": "dsds",
-        "password": "aa",
-        "role": "user",
-        "is_verified": false,
-        "verification_code": "654570",
-        "reset_code": null
     }
 }
