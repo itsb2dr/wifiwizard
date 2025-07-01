@@ -5,7 +5,7 @@ from PIL import Image
 from io import BytesIO
 
 QR_DB = 'qrcodes.json'
-IMAGE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static', 'images'))
+IMAGE_DIR = 'app/static/images'
 
 def generate_qr_with_logo(ssid, password, canvas_data_base64, user_id, scan_text):
     qr_id = get_next_qr_id()
@@ -16,10 +16,6 @@ def generate_qr_with_logo(ssid, password, canvas_data_base64, user_id, scan_text
     os.makedirs(IMAGE_DIR, exist_ok=True)
 
     try:
-        if not canvas_data_base64 or "," not in canvas_data_base64:
-            print("QR Save Error: Invalid canvas data.")
-            return None
-
         img_data = base64.b64decode(canvas_data_base64.split(",")[1])
         img = Image.open(BytesIO(img_data))
         img.save(img_path)
