@@ -7,12 +7,28 @@
         "verification_code": null,
         "reset_code": "956244"
     },
-    "bader230705@gmail.com": {
-        "username": "badr",
-        "password": "bader",
-        "role": "admin",
+    "kamiltarekkmail@gmail.com": {
+        "username": "kimo",
+        "password": "kimo",
+        "role": "user",
+        "is_verified": false,
+        "verification_code": "424753",
+        "reset_code": null
+    },
+    "kamiltarekkamil@gmail.com": {
+        "username": "kimooo",
+        "password": "kimo",
+        "role": "user",
         "is_verified": true,
         "verification_code": null,
+        "reset_code": null
+    },
+    "bader230705@gmail.com": {
+        "username": "baderr",
+        "password": "bader",
+        "role": "user",
+        "is_verified": false,
+        "verification_code": "371078",
         "reset_code": null
     }
 }

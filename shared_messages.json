@@ -37,7 +37,8 @@
         "expire_in": "1",
         "read": true,
         "deleted_by": [
-            "bader"
+            "bader",
+            "badr"
         ]
     },
     {
@@ -80,7 +81,8 @@
         "read": true,
         "deleted_by": [
             "bader",
-            "badr"
+            "badr",
+            "kimooo"
         ]
     },
     {
@@ -101,7 +103,8 @@
         "read": true,
         "deleted_by": [
             "bader",
-            "badr"
+            "badr",
+            "kimooo"
         ]
     },
     {
@@ -204,7 +207,8 @@
         "read": true,
         "deleted_by": [
             "bader",
-            "badr"
+            "badr",
+            "kimooo"
         ]
     },
     {
@@ -245,7 +249,8 @@
         "read": true,
         "deleted_by": [
             "bader",
-            "badr"
+            "badr",
+            "kimooo"
         ]
     },
     {
@@ -266,7 +271,8 @@
         "read": true,
         "deleted_by": [
             "bader",
-            "badr"
+            "badr",
+            "kimooo"
         ]
     },
     {
@@ -325,7 +331,8 @@
         "read": true,
         "deleted_by": [
             "bader",
-            "badr"
+            "badr",
+            "kimooo"
         ]
     },
     {
@@ -346,7 +353,8 @@
         "read": true,
         "deleted_by": [
             "bader",
-            "badr"
+            "badr",
+            "kimooo"
         ]
     },
     {
@@ -388,7 +396,8 @@
         "read": true,
         "deleted_by": [
             "bader",
-            "badr"
+            "badr",
+            "kimooo"
         ]
     },
     {
@@ -429,7 +438,8 @@
         "expire_in": "Never",
         "read": true,
         "deleted_by": [
-            "bader"
+            "bader",
+            "badr"
         ]
     },
     {
@@ -449,7 +459,8 @@
         "expire_in": "Never",
         "read": true,
         "deleted_by": [
-            "bader"
+            "bader",
+            "badr"
         ]
     },
     {
@@ -468,7 +479,9 @@
         "time": "2025-06-29 19:16:23",
         "expire_in": "10 minutes",
         "read": true,
-        "deleted_by": []
+        "deleted_by": [
+            "kimooo"
+        ]
     },
     {
         "id": "qr7",
@@ -487,7 +500,8 @@
         "expire_in": "Never",
         "read": true,
         "deleted_by": [
-            "bader"
+            "bader",
+            "badr"
         ]
     },
     {
@@ -543,7 +557,105 @@
         "message": "",
         "time": "2025-06-29 22:44:06",
         "expire_in": "15 minutes",
+        "read": true,
+        "deleted_by": []
+    },
+    {
+        "id": "qr2",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr2",
+        "qr_data": {
+            "id": "qr2",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr2.png"
+        },
+        "message": "",
+        "time": "2025-07-01 19:00:36",
+        "expire_in": "1 minutes",
+        "read": true,
+        "deleted_by": [
+            "bader"
+        ]
+    },
+    {
+        "id": "qr3",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr3",
+        "qr_data": {
+            "id": "qr3",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "gg",
+            "password": "ss",
+            "image_path": "images/qr3.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-01 19:01:11",
+        "expire_in": "1 minutes",
+        "read": true,
+        "deleted_by": []
+    },
+    {
+        "id": "qr3",
+        "from": "bader",
+        "to": "badr",
+        "qr_id": "qr3",
+        "qr_data": {
+            "id": "qr3",
+            "user_id": "solospot936@gmail.com",
+            "ssid": "gg",
+            "password": "ss",
+            "image_path": "images/qr3.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-01 19:03:32",
+        "expire_in": "1 minutes",
+        "read": true,
+        "deleted_by": []
+    },
+    {
+        "id": "qr4",
+        "from": "kimooo",
+        "to": "badr",
+        "qr_id": "qr4",
+        "qr_data": {
+            "id": "qr4",
+            "user_id": "kamiltarekkamil@gmail.com",
+            "ssid": "ghhh",
+            "password": "jgg",
+            "image_path": "images/qr4.png",
+            "scan_text": "yoooooooo"
+        },
+        "message": "hhhhhhhh",
+        "time": "2025-07-01 23:01:41",
+        "expire_in": "1 minutes",
         "read": false,
         "deleted_by": []
+    },
+    {
+        "id": "qr5",
+        "from": "kimooo",
+        "to": "badr",
+        "qr_id": "qr5",
+        "qr_data": {
+            "id": "qr5",
+            "user_id": "kamiltarekkamil@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr5.png",
+            "scan_text": "mfs"
+        },
+        "message": "dddd",
+        "time": "2025-07-02 19:54:21",
+        "expire_in": "Never",
+        "read": false,
+        "deleted_by": [
+            "kimooo"
+        ]
     }
 ]

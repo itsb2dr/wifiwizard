@@ -1,1 +1,35 @@
-[]
+{
+    "qr1": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr1.png"
+    },
+    "qr2": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr2.png"
+    },
+    "qr3": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "gg",
+        "password": "ss",
+        "image_path": "images/qr3.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr4": {
+        "user_id": "kamiltarekkamil@gmail.com",
+        "ssid": "ghhh",
+        "password": "jgg",
+        "image_path": "images/qr4.png",
+        "scan_text": "yoooooooo"
+    },
+    "qr5": {
+        "user_id": "kamiltarekkamil@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr5.png",
+        "scan_text": "mfs"
+    }
+}

@@ -1,11 +1,15 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div class="auth-page">
-  <div class="auth-container">
-    <h2>Reset Email Sent</h2>
-    <p>Check your inbox for the reset code.</p>
+  <div class="auth-container stylish-auth-box">
+    <h2 class="auth-heading">📧 Reset Email Sent</h2>
+    <p class="auth-message">We've sent a password reset code to your email address. Please check your inbox and follow the instructions.</p>
+
     {% include 'partials/alerts.html' %}
-    <p><a href="{{ url_for('auth.login') }}">Back to login</a></p>
+
+    <div class="auth-actions">
+      <a href="{{ url_for('auth.login') }}" class="styled-link">← Back to Login</a>
+    </div>
   </div>
 </div>
 {% endblock %}
