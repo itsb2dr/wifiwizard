@@ -657,5 +657,24 @@
         "deleted_by": [
             "kimooo"
         ]
+    },
+    {
+        "id": "qr6",
+        "from": "adam",
+        "to": "bader",
+        "qr_id": "qr6",
+        "qr_data": {
+            "id": "qr6",
+            "user_id": "adam81106@gmail.com",
+            "ssid": "marika",
+            "password": "marika20",
+            "image_path": "images/qr6.png",
+            "scan_text": "yoooooo"
+        },
+        "message": "ddddd",
+        "time": "2025-07-02 23:18:39",
+        "expire_in": "1 minutes",
+        "read": true,
+        "deleted_by": []
     }
 ]

@@ -3,17 +3,74 @@
 <div class="auth-page">
   <div class="auth-container">
     <h2>Create Free Account</h2>
-    <form method="POST">
-      <input type="text" name="username" placeholder="Username" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <input type="password" name="confirm" placeholder="Confirm Password" required>
+    <form id="registerForm" method="POST" onsubmit="return validateRegisterForm();">
+      <input type="text" name="username" id="reg-username" placeholder="Username" required>
+      <input type="email" name="email" id="reg-email" placeholder="Email" required>
+      <input type="password" name="password" id="reg-password" placeholder="Password" required>
+      <input type="password" name="confirm" id="reg-confirm" placeholder="Confirm Password" required>
+      <select name="gender" id="reg-gender" required style="margin-bottom: 14px; padding: 12px; border-radius: 8px; font-size: 15px; border: 1px solid #ccc; background-color: white; width: 100%;">
+        <option value="boy">Male</option>
+        <option value="girl">Female</option>
+      </select>
       <button type="submit">Sign Up</button>
     </form>
+
+    <div id="regAlert-required" class="flash flash-danger" style="display:none; margin-top: 16px;"></div>
+    <div id="regAlert-length" class="flash flash-danger" style="display:none; margin-top: 8px;"></div>
+    <div id="regAlert-content" class="flash flash-danger" style="display:none; margin-top: 8px;"></div>
+    <div id="regAlert-mismatch" class="flash flash-danger" style="display:none; margin-top: 8px;"></div>
+
     <div style="margin-top: 18px;">
       {% include 'partials/alerts.html' %}
     </div>
     <p style="margin-top: 12px;">Already have an account? <a href="{{ url_for('auth.login') }}">Log in</a></p>
   </div>
 </div>
+
+<script>
+function validateRegisterForm() {
+  const username = document.getElementById("reg-username").value.trim();
+  const email = document.getElementById("reg-email").value.trim();
+  const password = document.getElementById("reg-password").value;
+  const confirm = document.getElementById("reg-confirm").value;
+
+  const alertRequired = document.getElementById("regAlert-required");
+  const alertLength = document.getElementById("regAlert-length");
+  const alertContent = document.getElementById("regAlert-content");
+  const alertMismatch = document.getElementById("regAlert-mismatch");
+
+  alertRequired.style.display = "none";
+  alertLength.style.display = "none";
+  alertContent.style.display = "none";
+  alertMismatch.style.display = "none";
+
+  let isValid = true;
+
+  if (!username || !email || !password || !confirm) {
+    alertRequired.innerText = "All fields are required.";
+    alertRequired.style.display = "block";
+    isValid = false;
+  }
+
+  if (password.length < 5) {
+    alertLength.innerText = "Password must be at least 5 characters.";
+    alertLength.style.display = "block";
+    isValid = false;
+  }
+
+  if (!/[A-Za-z0-9]/.test(password)) {
+    alertContent.innerText = "Password must include at least one letter or number.";
+    alertContent.style.display = "block";
+    isValid = false;
+  }
+
+  if (password !== confirm) {
+    alertMismatch.innerText = "Passwords do not match.";
+    alertMismatch.style.display = "block";
+    isValid = false;
+  }
+
+  return isValid;
+}
+</script>
 {% endblock %}

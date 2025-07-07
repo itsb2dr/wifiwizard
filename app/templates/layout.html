@@ -57,6 +57,44 @@
     .highlight-btn:hover {
       background-color: #0099cc;
     }
+
+    .avatar-dropdown {
+      position: relative;
+    }
+
+    .avatar-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #00bfff;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 48px;
+      right: 0;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      z-index: 1000;
+      padding: 8px 0;
+      min-width: 140px;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 18px;
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #f0f0f0;
+    }
   </style>
 </head>
 <body>
@@ -72,7 +110,13 @@
         {% if current_user.role == 'admin' %}
           <a href="{{ url_for('admin.dashboard') }}">Admin Panel</a>
         {% endif %}
-        <a href="{{ url_for('auth.logout') }}">Logout</a>
+        <div class="avatar-dropdown" onclick="toggleDropdown()">
+          <img src="{{ current_user.avatar if current_user.avatar else url_for('static', filename='images/default_avatar.png') }}" class="avatar-img" alt="Avatar">
+          <div class="dropdown-menu" id="dropdownMenu">
+            <a href="{{ url_for('profile.view') }}">Profile</a>
+            <a href="{{ url_for('auth.logout') }}">Logout</a>
+          </div>
+        </div>
       {% else %}
         <a href="{{ url_for('auth.login') }}">Log in</a>
         <a href="{{ url_for('auth.register') }}" class="highlight-btn">Create Free Account</a>
@@ -95,5 +139,17 @@
   {% endif %}
 
   <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+  <script>
+    function toggleDropdown() {
+      const menu = document.getElementById("dropdownMenu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+    window.addEventListener('click', function(e) {
+      if (!e.target.closest('.avatar-dropdown')) {
+        const menu = document.getElementById("dropdownMenu");
+        if (menu) menu.style.display = "none";
+      }
+    });
+  </script>
 </body>
 </html>

@@ -31,5 +31,61 @@
         "password": "marika20",
         "image_path": "images/qr5.png",
         "scan_text": "mfs"
+    },
+    "qr6": {
+        "user_id": "adam81106@gmail.com",
+        "ssid": "marika",
+        "password": "marika20",
+        "image_path": "images/qr6.png",
+        "scan_text": "yoooooo"
+    },
+    "qr7": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "UPC9028288",
+        "password": "b6qCppyncjyb",
+        "image_path": "images/qr7.png",
+        "scan_text": "DAINA"
+    },
+    "qr8": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "UPC9028288",
+        "password": "b6qCppyncjyb",
+        "image_path": "images/qr8.png",
+        "scan_text": "DAINA"
+    },
+    "qr9": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "sdd",
+        "password": "marika20",
+        "image_path": "images/qr9.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr10": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "now",
+        "password": "now",
+        "image_path": "images/qr10.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr11": {
+        "user_id": "solospot936@gmail.com",
+        "ssid": "noww",
+        "password": "noww",
+        "image_path": "images/qr11.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr12": {
+        "user_id": "8ec9babb-148a-4af5-97e1-09b53522bcc7",
+        "ssid": "now",
+        "password": "now",
+        "image_path": "images/qr12.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr13": {
+        "user_id": "8e25f284-9cf2-4078-b18e-11322bf189e3",
+        "ssid": "new",
+        "password": "marika20",
+        "image_path": "images/qr13.png",
+        "scan_text": "SCAN ME"
     }
 }

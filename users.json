@@ -1,34 +1,14 @@
 {
-    "solospot936@gmail.com": {
-        "username": "bader",
-        "password": "bader",
-        "role": "user",
-        "is_verified": true,
-        "verification_code": null,
-        "reset_code": "956244"
-    },
-    "kamiltarekkmail@gmail.com": {
-        "username": "kimo",
-        "password": "kimo",
-        "role": "user",
-        "is_verified": false,
-        "verification_code": "424753",
-        "reset_code": null
-    },
-    "kamiltarekkamil@gmail.com": {
-        "username": "kimooo",
-        "password": "kimo",
-        "role": "user",
-        "is_verified": true,
-        "verification_code": null,
-        "reset_code": null
-    },
     "bader230705@gmail.com": {
-        "username": "baderr",
+        "id": "8e25f284-9cf2-4078-b18e-11322bf189e3",
+        "username": "baderr11",
+        "email": "bader230705@gmail.com",
         "password": "bader",
         "role": "user",
-        "is_verified": false,
-        "verification_code": "371078",
-        "reset_code": null
+        "is_verified": true,
+        "verification_code": null,
+        "reset_code": null,
+        "gender": "boy",
+        "avatar": "https://avatar.iran.liara.run/public/boy?username=option8"
     }
 }

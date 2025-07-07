@@ -1,0 +1,124 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="auth-page">
+  <div class="auth-container" style="max-width: 750px;">
+    <h2 style="margin-bottom: 10px;">Your Profile</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-wrapper">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">
+              {{ message }}
+              <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <div style="margin-top: 10px; text-align: center;">
+      <img id="avatarPreview" src="{{ current_user.avatar }}" alt="Avatar" style="width:100px; height:100px; border-radius:50%; border: 3px solid #00bfff;">
+
+      <form method="POST" action="{{ url_for('profile.update_account') }}" id="editForm">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+          <div class="editable-field">
+            <span id="usernameDisplay">{{ current_user.username }}</span>
+            <input name="username" id="usernameInput" class="form-control" style="display:none;" />
+            <span class="edit-icon" onclick="toggleEdit('username')">✎</span>
+          </div>
+          <div class="editable-field">
+            <span id="emailDisplay">{{ current_user.email }}</span>
+            <input name="email" id="emailInput" class="form-control" style="display:none;" />
+            <span class="edit-icon" onclick="toggleEdit('email')">✎</span>
+          </div>
+          <button type="submit" style="margin-top: 10px;">Save Changes</button>
+        </div>
+      </form>
+    </div>
+
+    <form method="POST" action="{{ url_for('profile.change_avatar') }}">
+      <h3 style="margin-top: 30px;">Choose a new avatar:</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 12px;">
+        {% for i in range(1, 13) %}
+          <label>
+            <input type="radio" name="avatar" value="https://avatar.iran.liara.run/public/{{ current_user.gender }}?username=option{{ i }}" style="margin-bottom: 6px;" onchange="updateAvatarPreview(this.value)">
+            <img src="https://avatar.iran.liara.run/public/{{ current_user.gender }}?username=option{{ i }}" style="width:64px; height:64px; border-radius: 50%;">
+          </label>
+        {% endfor %}
+      </div>
+      <input type="hidden" id="finalAvatar" name="avatar">
+      <button type="submit" style="margin-top: 20px;">Save Avatar</button>
+    </form>
+
+    <div style="margin-top: 50px; width: 100%;">
+      <h3 style="text-align: center;">Your QR Code History <span style="font-weight: normal;">(Total: {{ qr_count }})</span></h3>
+      {% if qr_history %}
+        <div style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin-top: 20px;">
+          {% for qr_id, qr in qr_history %}
+            <div style="background: #fff; border: 1px solid #ccc; border-radius: 12px; padding: 16px; width: 200px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06); position: relative;">
+              <p style="font-size: 14px;"><strong>SSID:</strong> {{ qr.ssid }}</p>
+              <p style="font-size: 14px;"><strong>Password:</strong> {{ qr.password }}</p>
+              <img src="{{ url_for('static', filename=qr.image_path) }}" alt="QR" style="margin-top: 10px; height: 100px; border-radius: 6px;">
+              <a href="{{ url_for('static', filename=qr.image_path) }}" download style="display: block; margin-top: 8px; font-size: 13px; color: #00bfff; font-weight: bold;">Download</a>
+              <form method="POST" action="{{ url_for('profile.delete_qr', qr_id=qr_id) }}">
+                <button type="submit" style="margin-top: 6px; font-size: 12px; padding: 4px 10px; background: #dc3545; color: white; border: none; border-radius: 6px;">Delete</button>
+              </form>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p style="margin-top: 10px;">No QR codes saved yet.</p>
+      {% endif %}
+    </div>
+
+    <div style="margin-top: 40px; display: flex; justify-content: center; gap: 20px;">
+      <a href="{{ url_for('home.home') }}" style="background: #00bfff; color: white; padding: 14px 30px; font-size: 16px; font-weight: bold; border-radius: 8px; text-decoration: none;">Back to Home</a>
+      <a href="{{ url_for('auth.logout') }}" style="background: #dc3545; color: white; padding: 14px 30px; font-size: 16px; font-weight: bold; border-radius: 8px; text-decoration: none;">Logout</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .edit-icon {
+    position: absolute;
+    right: -20px;
+    top: 4px;
+    cursor: pointer;
+    color: #888;
+    font-size: 14px;
+  }
+  .edit-icon:hover {
+    color: #00bfff;
+  }
+  .editable-field {
+    position: relative;
+    width: 260px;
+    text-align: center;
+  }
+  .form-control {
+    width: 100%;
+    padding: 6px 10px;
+    font-size: 15px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    text-align: center;
+  }
+</style>
+
+<script>
+function updateAvatarPreview(url) {
+  document.getElementById('avatarPreview').src = url;
+  document.getElementById('finalAvatar').value = url;
+}
+
+function toggleEdit(field) {
+  const display = document.getElementById(field + 'Display');
+  const input = document.getElementById(field + 'Input');
+  input.value = display.innerText;
+  display.style.display = 'none';
+  input.style.display = 'block';
+  input.focus();
+}
+</script>
+{% endblock %}
