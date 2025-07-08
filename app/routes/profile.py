@@ -95,7 +95,7 @@ def update_account():
         users[new_email] = users.pop(original_email)
         users[new_email]['email'] = new_email
         users[new_email]['is_verified'] = False
-        code = ''.join([str(i) for i in os.urandom(3)])
+        code = ''.join([str(i % 10) for i in os.urandom(6)])  # 6-digit numeric code
         users[new_email]['verification_code'] = code
         save_users(users)
         send_verification_email(new_email, code)

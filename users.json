@@ -1,7 +1,19 @@
 {
+    "solospot936@gmail.com": {
+        "id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+        "username": "baderr",
+        "email": "solospot936@gmail.com",
+        "password": "bader",
+        "role": "user",
+        "is_verified": true,
+        "verification_code": null,
+        "reset_code": "608288",
+        "gender": "boy",
+        "avatar": "https://avatar.iran.liara.run/public/boy?username=option10"
+    },
     "bader230705@gmail.com": {
-        "id": "8e25f284-9cf2-4078-b18e-11322bf189e3",
-        "username": "baderr11",
+        "id": "02839c6d-5a51-44c6-9612-604b59978f31",
+        "username": "baderrr",
         "email": "bader230705@gmail.com",
         "password": "bader",
         "role": "user",
@@ -9,6 +21,18 @@
         "verification_code": null,
         "reset_code": null,
         "gender": "boy",
-        "avatar": "https://avatar.iran.liara.run/public/boy?username=option8"
+        "avatar": "https://avatar.iran.liara.run/public/boy?username=baderrr"
+    },
+    "badreldin.moussa.1@iliauni.edu.ge": {
+        "id": "632d801d-d758-4e31-8c4f-d00b66184be2",
+        "username": "bader1",
+        "email": "badreldin.moussa.1@iliauni.edu.ge",
+        "password": "bader",
+        "role": "user",
+        "is_verified": true,
+        "verification_code": null,
+        "reset_code": null,
+        "gender": "girl",
+        "avatar": "https://avatar.iran.liara.run/public/girl?username=option10"
     }
 }

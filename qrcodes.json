@@ -87,5 +87,40 @@
         "password": "marika20",
         "image_path": "images/qr13.png",
         "scan_text": "SCAN ME"
+    },
+    "qr14": {
+        "user_id": "02839c6d-5a51-44c6-9612-604b59978f31",
+        "ssid": "sdd",
+        "password": "sss",
+        "image_path": "images/qr14.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr15": {
+        "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+        "ssid": "sdd",
+        "password": "ss",
+        "image_path": "images/qr15.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr16": {
+        "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+        "ssid": "gg",
+        "password": "marika20",
+        "image_path": "images/qr16.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr17": {
+        "user_id": "4f1609d4-cc93-428f-958e-6c4940320332",
+        "ssid": "11111",
+        "password": "22222",
+        "image_path": "images/qr17.png",
+        "scan_text": "SCAN ME"
+    },
+    "qr18": {
+        "user_id": "632d801d-d758-4e31-8c4f-d00b66184be2",
+        "ssid": "ggg",
+        "password": "ggg",
+        "image_path": "images/qr18.png",
+        "scan_text": "SCAN ME"
     }
 }

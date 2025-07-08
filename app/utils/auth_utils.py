@@ -1,6 +1,7 @@
 import json
-from flask_login import UserMixin
 import os
+import uuid
+from flask_login import UserMixin
 
 USER_FILE = 'users.json'
 
@@ -31,8 +32,8 @@ def authenticate_user(login_input, password):
             user_data.get('username', '').lower() == login_input.lower()):
             if user_data['password'] == password:
                 u = User(user_data['id'], user_data['email'], user_data['password'], user_data.get('role', 'user'))
-                u.avatar = user_data.get('avatar')
                 u.username = user_data.get('username')
+                u.avatar = user_data.get('avatar')
                 u.gender = user_data.get('gender')
                 return u
     return None
@@ -43,7 +44,6 @@ def register_user(email, password, username, gender):
         if user_data.get('email') == email or user_data.get('username') == username:
             return False
 
-    import uuid
     user_id = str(uuid.uuid4())
     avatar_url = f"https://avatar.iran.liara.run/public/{gender}?username={username}"
     users[email] = {

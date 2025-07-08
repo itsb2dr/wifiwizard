@@ -165,7 +165,10 @@
         "expire_in": "7 days",
         "read": true,
         "deleted_by": [
-            "bader"
+            "bader",
+            null,
+            "baderr",
+            "baderrr"
         ]
     },
     {
@@ -228,7 +231,10 @@
         "expire_in": "5 hours",
         "read": true,
         "deleted_by": [
-            "bader"
+            "bader",
+            null,
+            "baderr",
+            "baderrr"
         ]
     },
     {
@@ -310,7 +316,10 @@
         "expire_in": "5 minutes",
         "read": true,
         "deleted_by": [
-            "bader"
+            "bader",
+            null,
+            "baderr",
+            "baderrr"
         ]
     },
     {
@@ -539,7 +548,10 @@
         "expire_in": "1 hours",
         "read": true,
         "deleted_by": [
-            "bader"
+            "bader",
+            null,
+            "baderr",
+            "baderrr"
         ]
     },
     {
@@ -674,6 +686,569 @@
         "message": "ddddd",
         "time": "2025-07-02 23:18:39",
         "expire_in": "1 minutes",
+        "read": true,
+        "deleted_by": []
+    },
+    {
+        "id": "qr14",
+        "from": null,
+        "to": "baderr",
+        "qr_id": "qr14",
+        "qr_data": {
+            "id": "qr14",
+            "user_id": "02839c6d-5a51-44c6-9612-604b59978f31",
+            "ssid": "sdd",
+            "password": "sss",
+            "image_path": "images/qr14.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-07 23:11:04",
+        "expire_in": "1 minutes",
+        "read": true,
+        "deleted_by": [
+            null,
+            "baderr",
+            "baderrr"
+        ]
+    },
+    {
+        "id": "qr14",
+        "from": null,
+        "to": "baderrr",
+        "qr_id": "qr14",
+        "qr_data": {
+            "id": "qr14",
+            "user_id": "02839c6d-5a51-44c6-9612-604b59978f31",
+            "ssid": "sdd",
+            "password": "sss",
+            "image_path": "images/qr14.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-07 23:12:16",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            null,
+            "baderr",
+            "baderrr"
+        ]
+    },
+    {
+        "id": "qr14",
+        "from": null,
+        "to": "baderr",
+        "qr_id": "qr14",
+        "qr_data": {
+            "id": "qr14",
+            "user_id": "02839c6d-5a51-44c6-9612-604b59978f31",
+            "ssid": "sdd",
+            "password": "sss",
+            "image_path": "images/qr14.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-07 23:25:15",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            null,
+            "baderr",
+            "baderrr"
+        ]
+    },
+    {
+        "id": "qr14",
+        "from": null,
+        "to": "baderr",
+        "qr_id": "qr14",
+        "qr_data": {
+            "id": "qr14",
+            "user_id": "02839c6d-5a51-44c6-9612-604b59978f31",
+            "ssid": "sdd",
+            "password": "sss",
+            "image_path": "images/qr14.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-07 23:25:59",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            null,
+            "baderr",
+            "baderrr"
+        ]
+    },
+    {
+        "id": "qr15",
+        "from": null,
+        "to": "baderr",
+        "qr_id": "qr15",
+        "qr_data": {
+            "id": "qr15",
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "sdd",
+            "password": "ss",
+            "image_path": "images/qr15.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-07 23:29:11",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            "baderr",
+            "baderrr"
+        ]
+    },
+    {
+        "id": "qr15",
+        "from": null,
+        "to": "baderr",
+        "qr_id": "qr15",
+        "qr_data": {
+            "id": "qr15",
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "sdd",
+            "password": "ss",
+            "image_path": "images/qr15.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-07 23:29:21",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            "baderr",
+            "baderrr"
+        ]
+    },
+    {
+        "id": "qr15",
+        "from": null,
+        "to": "baderrr",
+        "qr_id": "qr15",
+        "qr_data": {
+            "id": "qr15",
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "sdd",
+            "password": "ss",
+            "image_path": "images/qr15.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-07 23:29:26",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            "baderr",
+            "baderrr"
+        ]
+    },
+    {
+        "id": "338f5d65-72b5-455f-8e2d-0d5105facc3f",
+        "from": null,
+        "to": "baderr",
+        "qr_id": "qr15",
+        "qr_data": {
+            "id": "qr15",
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "sdd",
+            "password": "ss",
+            "image_path": "images/qr15.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-07 23:39:54",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            "baderr"
+        ]
+    },
+    {
+        "id": "4d20a180-8965-48d4-a876-5e4e679e5d12",
+        "from": null,
+        "to": "baderr",
+        "qr_id": "qr15",
+        "qr_data": {
+            "id": "qr15",
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "sdd",
+            "password": "ss",
+            "image_path": "images/qr15.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-07 23:40:08",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            "baderr"
+        ]
+    },
+    {
+        "id": "15cdf77f-62dd-456a-8182-711e915896aa",
+        "from": null,
+        "to": "baderr",
+        "qr_id": "qr15",
+        "qr_data": {
+            "id": "qr15",
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "sdd",
+            "password": "ss",
+            "image_path": "images/qr15.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-07 23:42:46",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            "baderr"
+        ]
+    },
+    {
+        "id": "2c91cdcb-eaca-4553-be63-7df7f811bcf1",
+        "from": null,
+        "to": "baderrr",
+        "qr_id": "qr15",
+        "qr_data": {
+            "id": "qr15",
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "sdd",
+            "password": "ss",
+            "image_path": "images/qr15.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-07 23:43:13",
+        "expire_in": "Never",
+        "read": true,
+        "deleted_by": [
+            "baderrr"
+        ]
+    },
+    {
+        "id": "qr15_20250707235543289585",
+        "from": "baderr",
+        "to": "baderrr",
+        "qr_id": "qr15",
+        "qr_data": {
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "sdd",
+            "password": "ss",
+            "image_path": "images/qr15.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-07 23:55:43",
+        "expire_in": "0",
+        "read": true,
+        "deleted_by": [
+            "baderrr",
+            "baderr"
+        ]
+    },
+    {
+        "id": "qr14_20250707235608690301",
+        "from": "baderrr",
+        "to": "baderr",
+        "qr_id": "qr14",
+        "qr_data": {
+            "user_id": "02839c6d-5a51-44c6-9612-604b59978f31",
+            "ssid": "sdd",
+            "password": "sss",
+            "image_path": "images/qr14.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-07 23:56:08",
+        "expire_in": "0",
+        "read": true,
+        "deleted_by": [
+            "baderr",
+            "baderrr"
+        ]
+    },
+    {
+        "id": "qr14_20250707235653686321",
+        "from": "baderrr",
+        "to": "baderr",
+        "qr_id": "qr14",
+        "qr_data": {
+            "user_id": "02839c6d-5a51-44c6-9612-604b59978f31",
+            "ssid": "sdd",
+            "password": "sss",
+            "image_path": "images/qr14.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-07 23:56:53",
+        "expire_in": "1",
+        "read": true,
+        "deleted_by": []
+    },
+    {
+        "id": "qr14_20250707235702132783",
+        "from": "baderrr",
+        "to": "baderr",
+        "qr_id": "qr14",
+        "qr_data": {
+            "user_id": "02839c6d-5a51-44c6-9612-604b59978f31",
+            "ssid": "sdd",
+            "password": "sss",
+            "image_path": "images/qr14.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-07 23:57:02",
+        "expire_in": "0",
+        "read": true,
+        "deleted_by": [
+            "baderrr",
+            "baderr"
+        ]
+    },
+    {
+        "id": "qr15_20250708004633260004",
+        "from": "baderr",
+        "to": "baderrr",
+        "qr_id": "qr15",
+        "qr_data": {
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "sdd",
+            "password": "ss",
+            "image_path": "images/qr15.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-08 00:46:33",
+        "expire_in": "0",
+        "read": true,
+        "deleted_by": [
+            "baderr",
+            "baderrr"
+        ]
+    },
+    {
+        "id": "qr15_20250708004633260035",
+        "from": "baderr",
+        "to": "bader1",
+        "qr_id": "qr15",
+        "qr_data": {
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "sdd",
+            "password": "ss",
+            "image_path": "images/qr15.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-08 00:46:33",
+        "expire_in": "0",
+        "read": true,
+        "deleted_by": [
+            "baderr",
+            "bader1"
+        ]
+    },
+    {
+        "id": "qr16_20250708011800414726",
+        "from": "baderr",
+        "to": "baderrr",
+        "qr_id": "qr16",
+        "qr_data": {
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "gg",
+            "password": "marika20",
+            "image_path": "images/qr16.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-08 01:18:00",
+        "expire_in": "0",
+        "read": true,
+        "deleted_by": [
+            "baderr",
+            "baderrr"
+        ]
+    },
+    {
+        "id": "qr16_20250708011822559193",
+        "from": "baderr",
+        "to": "baderrr",
+        "qr_id": "qr16",
+        "qr_data": {
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "gg",
+            "password": "marika20",
+            "image_path": "images/qr16.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "dddd",
+        "time": "2025-07-08 01:18:22",
+        "expire_in": "0",
+        "read": true,
+        "deleted_by": [
+            "baderr",
+            "baderrr"
+        ]
+    },
+    {
+        "id": "qr16_20250708011936056157",
+        "from": "baderr",
+        "to": "baderrr",
+        "qr_id": "qr16",
+        "qr_data": {
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "gg",
+            "password": "marika20",
+            "image_path": "images/qr16.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-08 01:19:36",
+        "expire_in": "0",
+        "read": true,
+        "deleted_by": [
+            "baderr",
+            "baderrr"
+        ]
+    },
+    {
+        "id": "qr16_20250708011959573931",
+        "from": "baderr",
+        "to": "baderrr",
+        "qr_id": "qr16",
+        "qr_data": {
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "gg",
+            "password": "marika20",
+            "image_path": "images/qr16.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-08 01:19:59",
+        "expire_in": "0",
+        "read": true,
+        "deleted_by": [
+            "baderr",
+            "baderrr"
+        ]
+    },
+    {
+        "id": "qr15_20250708012015756674",
+        "from": "baderr",
+        "to": "bader1",
+        "qr_id": "qr15",
+        "qr_data": {
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "sdd",
+            "password": "ss",
+            "image_path": "images/qr15.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-08 01:20:15",
+        "expire_in": "0",
+        "read": true,
+        "deleted_by": [
+            "baderr",
+            "bader1"
+        ]
+    },
+    {
+        "id": "qr15_20250708012015756707",
+        "from": "baderr",
+        "to": "baderrr",
+        "qr_id": "qr15",
+        "qr_data": {
+            "user_id": "f595d10d-d94c-47d0-9962-4dd3ce366018",
+            "ssid": "sdd",
+            "password": "ss",
+            "image_path": "images/qr15.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "",
+        "time": "2025-07-08 01:20:15",
+        "expire_in": "0",
+        "read": true,
+        "deleted_by": [
+            "baderr",
+            "baderrr"
+        ]
+    },
+    {
+        "id": "qr17_20250708013551739786",
+        "from": "bader1",
+        "to": "baderr",
+        "qr_id": "qr17",
+        "qr_data": {
+            "user_id": "4f1609d4-cc93-428f-958e-6c4940320332",
+            "ssid": "11111",
+            "password": "22222",
+            "image_path": "images/qr17.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "33333",
+        "time": "2025-07-08 01:35:51",
+        "expire_in": "0",
+        "read": true,
+        "deleted_by": []
+    },
+    {
+        "id": "qr17_20250708013551739816",
+        "from": "bader1",
+        "to": "baderrr",
+        "qr_id": "qr17",
+        "qr_data": {
+            "user_id": "4f1609d4-cc93-428f-958e-6c4940320332",
+            "ssid": "11111",
+            "password": "22222",
+            "image_path": "images/qr17.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "33333",
+        "time": "2025-07-08 01:35:51",
+        "expire_in": "0",
+        "read": true,
+        "deleted_by": []
+    },
+    {
+        "id": "qr17_20250708013608588046",
+        "from": "bader1",
+        "to": "baderr",
+        "qr_id": "qr17",
+        "qr_data": {
+            "user_id": "4f1609d4-cc93-428f-958e-6c4940320332",
+            "ssid": "11111",
+            "password": "22222",
+            "image_path": "images/qr17.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "444444",
+        "time": "2025-07-08 01:36:08",
+        "expire_in": "1",
+        "read": true,
+        "deleted_by": []
+    },
+    {
+        "id": "qr17_20250708013608588082",
+        "from": "bader1",
+        "to": "baderrr",
+        "qr_id": "qr17",
+        "qr_data": {
+            "user_id": "4f1609d4-cc93-428f-958e-6c4940320332",
+            "ssid": "11111",
+            "password": "22222",
+            "image_path": "images/qr17.png",
+            "scan_text": "SCAN ME"
+        },
+        "message": "444444",
+        "time": "2025-07-08 01:36:08",
+        "expire_in": "1",
         "read": true,
         "deleted_by": []
     }

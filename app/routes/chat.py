@@ -20,12 +20,9 @@ def load_users():
 
 def load_qrcodes():
     if not os.path.exists(QR_DB):
-        return []
+        return {}
     with open(QR_DB, 'r') as f:
-        data = json.load(f)
-        if isinstance(data, dict):
-            return [dict(id=k, **v) for k, v in data.items() if isinstance(v, dict)]
-        return data
+        return json.load(f)
 
 
 def load_messages():
@@ -46,15 +43,7 @@ def parse_minutes(expire_value):
     try:
         return int(expire_value)
     except ValueError:
-        units = {
-            "minute": 1, "minutes": 1,
-            "hour": 60, "hours": 60,
-            "day": 1440, "days": 1440
-        }
-        parts = expire_value.lower().split()
-        if len(parts) == 2 and parts[1] in units:
-            return int(parts[0]) * units[parts[1]]
-    return 0
+        return 0
 
 
 def convert_to_label(minutes):
@@ -82,7 +71,7 @@ def is_expired(msg):
         if not expire_in or expire_in == "0" or expire_in.lower() == "never":
             return False
         sent_time = datetime.strptime(msg.get("time"), "%Y-%m-%d %H:%M:%S")
-        expire_minutes = parse_minutes(expire_in)
+        expire_minutes = parse_minutes(msg.get("expire_in"))
         return datetime.now() > sent_time + timedelta(minutes=expire_minutes)
     except:
         return False
@@ -95,43 +84,54 @@ def chat():
     all_messages = load_messages()
     all_qrcodes = load_qrcodes()
 
-    my_email = current_user.id
-    my_username = users.get(my_email, {}).get("username")
+    my_id = current_user.id
+    my_user = next((u for u in users.values() if u.get("id") == my_id), None)
+    my_username = my_user.get("username")
 
     if request.method == 'POST':
-        recipient_username = request.form.get('recipient')
+        recipient_raw = request.form.get('recipient', '')
+        recipient_usernames = [r.strip() for r in recipient_raw.split(',') if r.strip()]
         qr_id = request.form.get('qr_id')
         message = request.form.get('message', '')
         expire_value = request.form.get('expire_in', '0') or '0'
 
-        if recipient_username == my_username:
+        if not recipient_usernames:
+            flash("Please enter at least one recipient.", "danger")
+            return redirect(url_for('chat.chat'))
+
+        if my_username in recipient_usernames:
             flash("You cannot send a QR to yourself.", "danger")
             return redirect(url_for('chat.chat'))
 
-        qr_entry = next((q for q in all_qrcodes if q.get('id') == qr_id and q.get('user_id') == my_email), None)
+        qr_entry = next((v for k, v in all_qrcodes.items() if k == qr_id and v.get('user_id') == my_id), None)
         if not qr_entry:
             flash("QR code not found or unauthorized.", "danger")
             return redirect(url_for('chat.chat'))
 
-        recipient_email = next((email for email, info in users.items() if info.get("username") == recipient_username), None)
-        if not recipient_email:
-            flash("Recipient username not found.", "danger")
+        invalid_recipients = [r for r in recipient_usernames if not any(u for u in users.values() if u.get("username") == r)]
+        if invalid_recipients:
+            flash("Invalid usernames: " + ", ".join(invalid_recipients), "danger")
             return redirect(url_for('chat.chat'))
 
-        expire_label = convert_to_label(int(expire_value)) if expire_value.isdigit() else expire_value
+        for recipient_username in recipient_usernames:
+            recipient_user = next((u for u in users.values() if u.get("username") == recipient_username), None)
+            if not recipient_user:
+                continue
 
-        all_messages.append({
-            "id": qr_id,
-            "from": my_username,
-            "to": recipient_username,
-            "qr_id": qr_id,
-            "qr_data": qr_entry,
-            "message": message,
-            "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "expire_in": expire_label,
-            "read": False,
-            "deleted_by": []
-        })
+            new_id = f"{qr_id}_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
+            all_messages.append({
+                "id": new_id,
+                "from": my_username,
+                "to": recipient_username,
+                "qr_id": qr_id,
+                "qr_data": qr_entry,
+                "message": message,
+                "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "expire_in": expire_value,
+                "read": False,
+                "deleted_by": []
+            })
+
         save_messages(all_messages)
         flash("QR Code shared successfully.", "success")
         session.modified = True
@@ -145,15 +145,35 @@ def chat():
     if updated:
         save_messages(all_messages)
 
-    inbox = [
-        m for m in all_messages
-        if (m.get('to') == my_username or m.get('from') == my_username)
-        and my_username not in m.get('deleted_by', [])
-        and not is_expired(m)
-    ]
-    my_qrs = [q for q in all_qrcodes if q.get('user_id') == my_email]
+    inbox = []
+    for m in all_messages:
+        if (m.get('to') == my_username or m.get('from') == my_username) and my_username not in m.get('deleted_by', []) and not is_expired(m):
+            msg_copy = m.copy()
+            msg_copy['from_display'] = "You" if msg_copy['from'] == my_username else msg_copy['from']
+            inbox.append(msg_copy)
 
-    return render_template('chat.html', my_username=my_username, inbox=inbox, my_qrs=my_qrs)
+    my_qrs = [
+        {"id": k, **v}
+        for k, v in all_qrcodes.items()
+        if v.get("user_id") == my_id
+    ]
+
+    return render_template('chat.html',
+                           my_username=my_username,
+                           inbox=inbox,
+                           my_qrs=my_qrs,
+                           avatar=current_user.avatar)
+
+
+@chat_bp.route('/validate-users', methods=['POST'])
+@login_required
+def validate_users():
+    data = request.get_json()
+    usernames = [u.strip() for u in data.get('recipients', []) if u.strip()]
+    users = load_users()
+    all_usernames = [u['username'] for u in users.values()]
+    invalid = [u for u in usernames if u not in all_usernames]
+    return jsonify({'valid': len(invalid) == 0, 'invalid': invalid})
 
 
 @chat_bp.route('/has_new')
@@ -161,7 +181,9 @@ def chat():
 def has_new():
     users = load_users()
     all_messages = load_messages()
-    my_username = users.get(current_user.id, {}).get("username")
+    my_user = next((u for u in users.values() if u.get("id") == current_user.id), None)
+    my_username = my_user.get("username")
+
     new_messages = any(
         m.get('to') == my_username and not m.get('read') and my_username not in m.get('deleted_by', []) and not is_expired(m)
         for m in all_messages
@@ -174,7 +196,9 @@ def has_new():
 def delete_message():
     users = load_users()
     all_messages = load_messages()
-    my_username = users.get(current_user.id, {}).get("username")
+    my_user = next((u for u in users.values() if u.get("id") == current_user.id), None)
+    my_username = my_user.get("username")
+
     data = request.get_json()
     delete_id = data.get('delete_id')
 

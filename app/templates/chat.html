@@ -53,11 +53,56 @@
     }
     .expire-info { font-size: 0.75em; color: #777; margin-top: 4px; }
     .countdown { font-size: 0.75em; color: #999; font-style: italic; margin-top: 4px; }
-    #chat-icon-wrapper { position: relative; font-size: 28px; }
-    #red-dot {
-      position: absolute; top: -3px; right: -3px;
-      width: 10px; height: 10px; background: red;
-      border-radius: 50%; display: none;
+
+    .tag-input-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: white;
+      min-height: 44px;
+      align-items: center;
+      flex-direction: row;
+    }
+    #tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+    #recipient-input {
+      border: none;
+      outline: none;
+      flex-grow: 1;
+      padding: 6px;
+      font-size: 0.9em;
+      min-width: 120px;
+    }
+    .tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 20px;
+      background-color: #e6f7ff;
+      font-size: 0.85em;
+      border: 1px solid #007bff;
+    }
+    .tag.invalid {
+      background-color: #ffe6e6;
+      border: 1px dashed red;
+      color: red;
+    }
+    .tag .remove-tag {
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .input-error-msg {
+      color: red;
+      font-size: 0.85em;
+      margin-top: 4px;
     }
   </style>
 </head>
@@ -66,13 +111,21 @@
   <div class="chat-container styled-chat-box">
 
     <div class="chat-header">
-      <h2>👋 Welcome, <span class="username">{{ my_username }}</span></h2>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>👋 Welcome, <span class="username">{{ current_user.username }}</span></h2>
+        <img src="{{ current_user.avatar }}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
+      </div>
     </div>
 
     <div class="share-form styled-share">
       <h3>Share a QR Code</h3>
-      <form method="POST">
-        <input type="text" name="recipient" placeholder="Recipient Username" required>
+      <form id="share-form" method="POST">
+        <div class="tag-input-wrapper">
+          <div id="tag-container"></div>
+          <input type="text" id="recipient-input" placeholder="Type recipient username" autocomplete="off">
+          <input type="hidden" name="recipient" id="recipient">
+        </div>
+        <div id="recipient-error" class="input-error-msg"></div>
         <select name="qr_id" required>
           <option value="" disabled selected>Select a QR Code</option>
           {% for qr in my_qrs %}
@@ -84,7 +137,7 @@
           {% for val, label in expiration_display_map.items() %}
             <option value="{{ val }}">{{ label }}</option>
           {% endfor %}
-        </select>        
+        </select>
         <button type="submit" class="share-btn">Send QR</button>
       </form>
     </div>
@@ -108,7 +161,7 @@
                  data-expire="{{ msg['expire_in'] }}"
                  data-time="{{ msg['time'] }}">
               <div class="message-header">
-                <p><strong>From:</strong> {{ 'You' if msg['from'] == my_username else msg['from'] }}</p>
+                <p><strong>From:</strong> {{ msg['from_display'] }}</p>
                 <p class="timestamp">{{ msg['time'] }}</p>
               </div>
               <div class="message-content">
@@ -137,7 +190,6 @@
     </div>
   </div>
 </div>
-
 <script>
   function toggleQR(btn) {
     const img = btn.nextElementSibling;
@@ -180,17 +232,6 @@
       if (new Date() > expiresAt) box.remove();
     });
 
-    if (localStorage.getItem("chat_seen") !== "true") {
-      fetch("/chat/has_new")
-        .then(res => res.json())
-        .then(data => {
-          if (data.new_messages) {
-            const dot = document.getElementById("red-dot");
-            if (dot) dot.style.display = "inline-block";
-          }
-        });
-    }
-
     setupExpirationTimers();
   });
 
@@ -230,6 +271,86 @@
       }, 1000);
     });
   }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("recipient-input");
+    const container = document.getElementById("tag-container");
+    const hiddenInput = document.getElementById("recipient");
+    const errorDiv = document.getElementById("recipient-error");
+    const myUsername = "{{ current_user.username }}";
+    let tags = [];
+
+    function renderTags() {
+      container.innerHTML = '';
+      tags.forEach(tag => {
+        const el = document.createElement("div");
+        el.className = "tag" + (tag.invalid ? " invalid" : "");
+        el.innerHTML = `${tag.username} <span class="remove-tag">&times;</span>`;
+        el.querySelector(".remove-tag").onclick = () => {
+          tags = tags.filter(t => t.username !== tag.username);
+          renderTags();
+        };
+        container.appendChild(el);
+      });
+      hiddenInput.value = tags.map(t => t.username).join(",");
+    }
+
+    async function validateTags() {
+      const response = await fetch('/chat/validate-users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recipients: tags.map(t => t.username) })
+      });
+      const data = await response.json();
+      tags = tags.map(t => ({
+        ...t,
+        invalid: data.invalid.includes(t.username)
+      }));
+      renderTags();
+    }
+
+    function addTagIfValid() {
+      const username = input.value.trim();
+      if (
+        username &&
+        username !== myUsername &&
+        !tags.find(t => t.username === username)
+      ) {
+        tags.push({ username, invalid: false });
+        input.value = '';
+        validateTags();
+      } else if (username === myUsername) {
+        errorDiv.textContent = "You cannot send a message to yourself.";
+      }
+    }
+
+    input.addEventListener("keydown", (e) => {
+      if ([" ", ","].includes(e.key)) {
+        e.preventDefault();
+        addTagIfValid();
+      }
+    });
+
+    input.addEventListener("blur", () => {
+      addTagIfValid();
+    });
+
+    document.getElementById("share-form").addEventListener("submit", function(e) {
+      const invalids = tags.filter(t => t.invalid).map(t => t.username);
+      if (tags.length === 0) {
+        e.preventDefault();
+        errorDiv.textContent = "Please enter at least one recipient.";
+        return;
+      }
+      if (invalids.length > 0) {
+        e.preventDefault();
+        errorDiv.textContent = "Invalid usernames: " + invalids.join(', ');
+        return;
+      }
+      errorDiv.textContent = '';
+      hiddenInput.value = tags.map(t => t.username).join(",");
+    });
+  });
 </script>
 </body>
 </html>
