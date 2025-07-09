@@ -1,3 +1,113 @@
+/* === FINAL FIXED + SMOOTH WAVY BACKGROUND === */
+/* === FINAL UPDATED COLORS + SLOWER WAVY ANIMATION === */
+/* === FINAL SMOOTH WAVY BACKGROUND WITH FLOATING STARS === */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  background: linear-gradient(
+    270deg,
+    #00008B, #000080, #0E3386, #120A8F,
+    #151d22, #00308F, #002387, #004792
+  );
+  background-size: 600% 600%;
+  animation: waveBG 60s ease-in-out infinite;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+@keyframes waveBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* === FLOATING STARS OVERLAY === */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background-image:
+    radial-gradient(#add8e6 2px, transparent 0),
+    radial-gradient(#b0e0e6 3px, transparent 0),
+    radial-gradient(#dbeeff 1.5px, transparent 0),
+    radial-gradient(#cceeff 2.5px, transparent 0);
+  background-size: 5px 5px, 8px 8px, 4px 4px, 6px 6px;
+  background-position:
+    10% 20%,
+    30% 60%,
+    70% 40%,
+    90% 80%;
+  animation: floatStars 100s linear infinite;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+@keyframes floatStars {
+  0% {
+    background-position:
+      10% 20%,
+      30% 60%,
+      70% 40%,
+      90% 80%;
+  }
+  50% {
+    background-position:
+      15% 25%,
+      35% 55%,
+      65% 45%,
+      85% 75%;
+  }
+  100% {
+    background-position:
+      10% 20%,
+      30% 60%,
+      70% 40%,
+      90% 80%;
+  }
+}
+
+/* === REAL FLOATING STARS (DOTS) EFFECT === */
+.star {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: #b2ffff;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 8s infinite ease-in-out, fall 90s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10vh) translateX(0); }
+  100% { transform: translateY(110vh) translateX(10vw); }
+}
+
+
+/* === ANIMATED BACKGROUND END === */
+
+
 /* === Global Styles === */
 * {
   margin: 0;
@@ -56,6 +166,20 @@ body {
 
 .nav-auth .highlight-btn:hover {
   background: #00aee6;
+}
+
+/* === Dark Mode Toggle Button === */
+.dark-toggle {
+  margin-left: 20px;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.dark-toggle:hover {
+  transform: scale(1.2);
 }
 
 /* === Auth Pages === */
@@ -432,7 +556,6 @@ canvas#qrCanvas {
   cursor: pointer;
 }
 
-
 /* === Stylish Auth Box === */
 .stylish-auth-box {
   background: #ffffff;
@@ -468,3 +591,4 @@ canvas#qrCanvas {
 .auth-actions .styled-link:hover {
   text-decoration: underline;
 }
+

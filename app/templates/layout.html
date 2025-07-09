@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,50 +9,31 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
   <style>
-    .main-header {
-      position: relative;
-      background: white;
-      border-bottom: 1px solid #ddd;
-      padding: 18px 40px;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-    }
-
-    .logo {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+    .floating-nav {
+      position: fixed;
+      top: 20px;
+      right: 30px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 20px;
+      z-index: 1000;
     }
 
-    .logo img {
-      height: 70px;
+    .floating-nav a {
+      color: #fff;
+      font-weight: bold;
+      font-size: 15px;
+      text-decoration: none;
+      transition: color 0.3s ease;
     }
 
-    .logo span {
-      font-size: 32px;
-      font-weight: 900;
-      color: #0a0a23;
-      text-shadow: 0 0 4px #9e9eff;
-    }
-
-    .nav-auth {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-
-    .highlight-btn {
+    .floating-nav .highlight-btn {
       background-color: #00bfff;
-      color: white;
+      color: white !important;
       padding: 10px 16px;
       border-radius: 6px;
       text-decoration: none;
       font-weight: bold;
-      transition: background 0.3s ease;
     }
 
     .highlight-btn:hover {
@@ -78,7 +60,6 @@
       background: white;
       border: 1px solid #ddd;
       border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       z-index: 1000;
       padding: 8px 0;
       min-width: 140px;
@@ -88,7 +69,7 @@
       display: block;
       padding: 10px 18px;
       text-decoration: none;
-      color: #333;
+      color: #000;
       font-size: 14px;
     }
 
@@ -97,34 +78,27 @@
     }
   </style>
 </head>
-<body>
-  <header class="main-header">
-    <div class="logo">
-      <a href="/">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="WiFi Wizard Logo">
-      </a>
-      <span>WIFI WIZARD</span>
-    </div>
-    <div class="nav-auth">
-      {% if current_user.is_authenticated %}
-        {% if current_user.role == 'admin' %}
-          <a href="{{ url_for('admin.dashboard') }}">Admin Panel</a>
-        {% endif %}
-        <div class="avatar-dropdown" onclick="toggleDropdown()">
-          <img src="{{ current_user.avatar if current_user.avatar else url_for('static', filename='images/default_avatar.png') }}" class="avatar-img" alt="Avatar">
-          <div class="dropdown-menu" id="dropdownMenu">
-            <a href="{{ url_for('profile.view') }}">Profile</a>
-            <a href="{{ url_for('auth.logout') }}">Logout</a>
-          </div>
-        </div>
-      {% else %}
-        <a href="{{ url_for('auth.login') }}">Log in</a>
-        <a href="{{ url_for('auth.register') }}" class="highlight-btn">Create Free Account</a>
+<body class="dark-mode">
+  <div class="floating-nav">
+    {% if current_user.is_authenticated %}
+      {% if current_user.role == 'admin' %}
+        <a href="{{ url_for('admin.dashboard') }}">Admin Panel</a>
       {% endif %}
-    </div>
-  </header>
+      <div class="avatar-dropdown" onclick="toggleDropdown()">
+        <img src="{{ current_user.avatar if current_user.avatar else url_for('static', filename='images/default_avatar.png') }}" class="avatar-img" alt="Avatar">
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="{{ url_for('profile.view') }}">Profile</a>
+          <a href="{{ url_for('auth.logout') }}">Logout</a>
+        </div>
+      </div>
+    {% else %}
+      <a href="{{ url_for('auth.login') }}">Log in</a>
+      <a href="{{ url_for('auth.register') }}" class="highlight-btn">Create Free Account</a>
+    {% endif %}
+  </div>
 
   <main>
+    <div style="height: 80px;"></div>
     {% block content %}{% endblock %}
   </main>
 
@@ -144,7 +118,8 @@
       const menu = document.getElementById("dropdownMenu");
       menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
-    window.addEventListener('click', function(e) {
+
+    window.addEventListener('click', function (e) {
       if (!e.target.closest('.avatar-dropdown')) {
         const menu = document.getElementById("dropdownMenu");
         if (menu) menu.style.display = "none";
